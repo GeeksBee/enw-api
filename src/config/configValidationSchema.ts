@@ -6,20 +6,20 @@ import { publicConfigurationProps } from "./configuration";
  */
 const configValidationSchema = Joi.object({
     PORT: Joi.number().required(),
-    DATABASE_HOSTNAME: Joi.string().required(),
-    DATABASE_PORT: Joi.number().required(),
-    DATABASE_USERNAME: Joi.string().required(),
-    DATABASE_PASSWORD: Joi.string().required(),
-    DATABASE_NAME: Joi.string().required(),
+    DATABASE_URL: Joi.string().required(),
+    TWILIO_ACCOUNT_SID: Joi.string().required(),
+    TWILIO_AUTH_TOKEN: Joi.string().required(),
+    TWILIO_SENDER_PHONE_NUMBER: Joi.string().required(),
+    TWILIO_VERIFICATION_SERVICE_SID: Joi.string().required(),
 });
 
 export default configValidationSchema;
 
 export type ConfigProps = {
     PORT: number;
-    DATABASE_HOSTNAME: string;
-    DATABASE_PORT: number;
-    DATABASE_USERNAME: string;
-    DATABASE_PASSWORD: string;
-    DATABASE_NAME: string;
+    DATABASE_URL: string;
+    TWILIO_ACCOUNT_SID: string;
+    TWILIO_AUTH_TOKEN: string;
+    TWILIO_SENDER_PHONE_NUMBER: string;
+    TWILIO_VERIFICATION_SERVICE_SID: string;
 } & publicConfigurationProps;

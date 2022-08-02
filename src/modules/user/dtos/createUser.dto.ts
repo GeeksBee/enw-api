@@ -7,10 +7,6 @@ class CreateUserDto {
         message: "not a valid phone number",
     })
     phone: string;
-
-    @IsString()
-    @IsNotEmpty()
-    name: string;
 }
 
 export default CreateUserDto;

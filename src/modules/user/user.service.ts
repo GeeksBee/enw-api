@@ -18,11 +18,20 @@ export class UserService implements UserServiceInterface {
         return this.userRepository.findOneById(id);
     }
 
-    public getByEmail(email: string): Promise<User>;
+    public getByEmail(email: string): Promise<User> {
+        return this.userRepository.findByCondition({ email });
+    }
 
-    public getByPhone(phone: string): Promise<User>;
+    public getByPhone(phone: string): Promise<User> {
+        return this.userRepository.findByCondition({ phone });
+    }
 
-    public getUserIfRefreshTokenMatches(refreshToken: string, userId: number): Promise<User | null>;
+    public getUserIfRefreshTokenMatches(
+        refreshToken: string,
+        userId: number,
+    ): Promise<User | null> {
+        return this.userRepository.findOneById(userId);
+    }
 }
 
 export default UserService;

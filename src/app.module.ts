@@ -11,14 +11,14 @@ import { EmailModule } from "./email/email.module";
 import configuration from "./config/configuration";
 import configValidationSchema from "./config/configValidationSchema";
 import { LoggerMiddleware } from "./common/middlewares/logRequest.middleware";
-import { SessionModule } from './modules/session/session.module';
-
-console.log(`.env.${process.env.NODE_ENV}`);
+import { AuthenticationModule } from "./authentication/authentication.module";
+import { PhoneModule } from "./phone/phone.module";
+import getEnvFilePath from "./common/utils/getEnvFilePath";
 
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: [`.env.${process.env.NODE_ENV}`],
+            envFilePath: [getEnvFilePath()],
             load: [configuration],
             validationSchema: configValidationSchema,
             isGlobal: true,
@@ -29,7 +29,8 @@ console.log(`.env.${process.env.NODE_ENV}`);
         JobModule,
         UserProfileModule,
         EmailModule,
-        SessionModule,
+        AuthenticationModule,
+        PhoneModule,
     ],
     controllers: [AppController],
     providers: [AppService],

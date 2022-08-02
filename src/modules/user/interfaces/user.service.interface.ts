@@ -9,6 +9,4 @@ export interface UserServiceInterface {
     getByEmail(email: string): Promise<User>;
 
     getByPhone(phone: string): Promise<User>;
-
-    getUserIfRefreshTokenMatches(refreshToken: string, userId: number): Promise<User | null>;
 }
