@@ -1,19 +1,14 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "src/modules/user/user.module";
-import UserService from "src/modules/user/user.service";
-import AuthenticationService from "./authentication.service";
+import AdminService from "../modules/user/services/admin.service";
 
 @Module({
     imports: [UserModule],
     controllers: [],
     providers: [
         {
-            provide: "AuthenticationServiceInterface",
-            useClass: AuthenticationService,
-        },
-        {
-            provide: "UserServiceInterface",
-            useClass: UserService,
+            provide: "AdminServiceInterface",
+            useClass: AdminService,
         },
     ],
 })

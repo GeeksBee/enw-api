@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, Matches } from "class-validator";
 
-class CreateUserDto {
+class CreateApplicantDto {
     @IsString()
     @IsNotEmpty()
     @Matches(/^[6-9]\d{9}$/, {
@@ -9,4 +9,4 @@ class CreateUserDto {
     phone: string;
 }
 
-export default CreateUserDto;
+export default CreateApplicantDto;

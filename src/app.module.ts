@@ -4,9 +4,6 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { DatabaseModule } from "./database/database.module";
 import { UserModule } from "./modules/user/user.module";
-import { OrganisationModule } from "./modules/organisation/organisation.module";
-import { JobModule } from "./modules/job/job.module";
-import { UserProfileModule } from "./modules/userProfile/userProfile.module";
 import { EmailModule } from "./email/email.module";
 import configuration from "./config/configuration";
 import configValidationSchema from "./config/configValidationSchema";
@@ -25,9 +22,6 @@ import getEnvFilePath from "./common/utils/getEnvFilePath";
         }),
         DatabaseModule,
         UserModule,
-        OrganisationModule,
-        JobModule,
-        UserProfileModule,
         EmailModule,
         AuthenticationModule,
         PhoneModule,

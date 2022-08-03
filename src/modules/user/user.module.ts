@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import User from "./entities/user.entity";
 import { UserRepository } from "./user.repository";
-import UserService from "./user.service";
+import AdminService from "./services/admin.service";
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
@@ -12,8 +12,8 @@ import UserService from "./user.service";
             useClass: UserRepository,
         },
         {
-            provide: "UserServiceInterface",
-            useClass: UserService,
+            provide: "AdminServiceInterface",
+            useClass: AdminService,
         },
     ],
     exports: [
@@ -22,8 +22,8 @@ import UserService from "./user.service";
             useClass: UserRepository,
         },
         {
-            provide: "UserServiceInterface",
-            useClass: UserService,
+            provide: "AdminServiceInterface",
+            useClass: AdminService,
         },
     ],
 })

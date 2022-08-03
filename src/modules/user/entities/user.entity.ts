@@ -1,18 +1,23 @@
+import Session from "../../../authentication/entities/session.entity";
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 
 export enum UserRole {
-    SUPERUSER = 1,
-    USER,
+    SUPERADMIN,
     ADMIN,
+    EMPLOYER,
+    APPLICANT,
     GHOST, // TODO this property will be enabled when the user is created and will be changed to USER once the email of the user has been verified
     DELETED, // TODO soft delete feature
 }
+const roles = Object.values(UserRole).filter((item) => typeof item === "string");
+export type userRoles = typeof roles[number];
 
 export const userPrivateFields = ["password", "isEmailConfirmed", "isPhoneConfirmed"];
 
@@ -69,6 +74,9 @@ export class User {
 
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
+
+    @OneToMany(() => Session, (session) => session.user)
+    sessions: Session[];
 }
 
 export default User;

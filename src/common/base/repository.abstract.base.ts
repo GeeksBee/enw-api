@@ -16,12 +16,42 @@ export abstract class BaseAbstractRepository<T> implements BaseInterfaceReposito
         return this.entity.findOne(id);
     }
 
-    public findByCondition(filterCondition: any): Promise<T> {
+    public findByCondition(filterCondition: object): Promise<T> {
         return this.entity.findOne({ where: filterCondition });
     }
 
-    public findAll(): Promise<T[]> {
-        return this.entity.find();
+    public findAll(arg1?: unknown, arg2?: unknown, arg3?: unknown): Promise<T[]> {
+        // filterOptions, limit, offset
+        if (typeof arg1 === "object" && typeof arg2 === "number" && typeof arg3 === "number") {
+            return this.entity.find({
+                where: arg1 as object,
+                take: arg2 as number,
+                skip: arg3 as number,
+            });
+        }
+        // limit, offset
+        else if (typeof arg1 === "number" && typeof arg2 === "number") {
+            return this.entity.find({
+                take: arg1 as number,
+                skip: arg2 as number,
+            });
+        }
+        // filterOptions
+        else if (typeof arg1 === "object") {
+            return this.entity.find({
+                where: arg1,
+            });
+        } else {
+            return this.entity.find();
+        }
+    }
+
+    public count(): Promise<number> {
+        return this.entity.count();
+    }
+
+    public update(data: T | any): Promise<T> {
+        return this.entity.save(data);
     }
 
     public remove(id: number): Promise<DeleteResult> {

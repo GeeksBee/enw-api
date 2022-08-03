@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString, Matches, MinLength } from "class-validator";
-import { Match } from "../../../common/decorators/match.validate.decorator";
+import { Match } from "../../../../common/decorators/match.validate.decorator";
 
 class CreateAdminDto {
     @IsEmail()
