@@ -1,0 +1,63 @@
+[
+  {
+    "_id": "2d298b56-60e8-4e4d-bbf7-d6ab22f33f43",
+    "name": "(Global Env)",
+    "default": false,
+    "global": true,
+    "sortNum": -1,
+    "created": "2022-07-26T10:34:04.081Z",
+    "modified": "2022-07-26T10:34:42.730Z",
+    "data": [
+      {
+        "name": "host",
+        "value": "http://localhost:8080"
+      },
+      {
+        "name": "__host",
+        "value": "https://enw.herokuapp.com"
+      }
+    ]
+  },
+  {
+    "_id": "805ac655-f4b4-4e9d-8206-9909c9319545",
+    "name": "auth",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2022-07-31T05:47:25.947Z",
+    "modified": "2022-07-31T06:03:47.128Z",
+    "data": [
+      {
+        "name": "userName",
+        "value": "Raj Naik Dhulapkar"
+      },
+      {
+        "name": "userPhone",
+        "value": "9898989898"
+      },
+      {
+        "name": "userEmail",
+        "value": "rajdhulapkar@gmail.com"
+      },
+      {
+        "name": "adminName",
+        "value": "John Wick"
+      },
+      {
+        "name": "adminEmail",
+        "value": "john.wick@gmail.com"
+      },
+      {
+        "name": "adminPassword",
+        "value": "AdminUserPassword@69"
+      },
+      {
+        "name": "userRefreshToken",
+        "value": ""
+      },
+      {
+        "name": "adminRefreshToken",
+        "value": ""
+      }
+    ]
+  }
+]

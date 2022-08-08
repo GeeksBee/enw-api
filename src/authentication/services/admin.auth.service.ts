@@ -1,23 +1,24 @@
-import { HttpException, HttpStatus, Inject } from "@nestjs/common";
+import { HttpException, HttpStatus } from "@nestjs/common";
 import CreateAdminDto from "src/modules/user/dtos/admin/createAdmin.dto";
 import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
-import { AdminAuthenticationServiceInterface } from "../interfaces/admin.authentication.service.interface";
 import * as bcrypt from "bcrypt";
-import { AdminServiceInterface } from "src/modules/user/interfaces/admin.service.interface";
 import { omit } from "lodash";
 import { PostgresErrorCode } from "src/common/constants";
+import AdminService from "../../modules/user/services/admin.service";
+import RegisterAdminDto from "../dtos/admin/registerAdmin.dto";
 
-export default class AdminAuthenticationService implements AdminAuthenticationServiceInterface {
-    constructor(
-        @Inject("AdminServiceInterface") private readonly adminService: AdminServiceInterface,
-    ) {}
-    async registerAdmin(createAdminInput: CreateAdminDto): Promise<User> {
-        const hashedPassword = await bcrypt.hash(createAdminInput.password, 10);
+export default class AdminAuthenticationService {
+    constructor(private readonly adminService: AdminService) {}
+    async registerAdmin(registerAdminInput: RegisterAdminDto): Promise<User> {
+        const hashedPassword = await bcrypt.hash(registerAdminInput.password, 10);
+
         try {
             const createdUser = await this.adminService.createAdmin({
-                ...createAdminInput,
+                ...registerAdminInput,
                 password: hashedPassword,
             });
+            console.log(createdUser);
+
             return omit(createdUser, userPrivateFields);
         } catch (error) {
             if (error?.code === PostgresErrorCode.UniqueViolation) {

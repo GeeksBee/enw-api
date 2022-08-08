@@ -1,0 +1,45 @@
+[
+  {
+    "_id": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "colName": "auth",
+    "created": "2022-07-31T05:51:43.350Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "ae7b2665-9614-4c22-ba66-ccaef0f13f6d",
+        "name": "applicant-user-auth",
+        "containerId": "",
+        "created": "2022-07-31T05:51:50.413Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "62b27861-2ad0-459f-8141-3261f29e0f3b",
+        "name": "superAdmin-user-auth",
+        "containerId": "",
+        "created": "2022-07-31T05:51:56.452Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "714284d0-1dfb-4b73-b3c7-0df02ccbce04",
+        "name": "user-sesssion",
+        "containerId": "ae7b2665-9614-4c22-ba66-ccaef0f13f6d",
+        "created": "2022-07-31T06:07:34.382Z",
+        "sortNum": 30000
+      },
+      {
+        "_id": "6929d0bb-eb88-4985-9738-06eb2415f7f8",
+        "name": "admin-session",
+        "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
+        "created": "2022-07-31T06:08:25.431Z",
+        "sortNum": 40000
+      },
+      {
+        "_id": "4847a7c9-01cd-45be-9a38-f93d9c48db08",
+        "name": "employer-user-auth",
+        "containerId": "",
+        "created": "2022-08-07T14:11:11.844Z",
+        "sortNum": 50000
+      }
+    ]
+  }
+]

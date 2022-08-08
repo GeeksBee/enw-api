@@ -38,6 +38,6 @@ lerna-debug.log*
 .env.development
 .env.test
 
-sql_test_scripts
-references
-thunder-tests
+# sql_test_scripts
+# references
+# thunder-tests
