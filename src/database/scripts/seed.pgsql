@@ -1,8 +1,9 @@
+delete from "enw_session";
 delete from "enw_user";
 INSERT INTO "enw_user" 
 ("name", "email", "password","role","is_email_confirmed")
 VALUES 
-('Super Admin', 'admin_1@enw.in' ,'$2y$10$HxghXSFyQYVT3YdIAT/EauMkICGhECpZwREocVc/GJUbMIa.YbaCS', '0', TRUE);
+('Super Admin', 'admin_1@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '0', TRUE);
 SELECT * FROM "enw_user";
 
 -- select n.nspname as enum_schema,  

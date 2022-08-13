@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import CreateAdminDto from "src/modules/user/dtos/admin/createAdmin.dto";
 import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
 import * as bcrypt from "bcrypt";
@@ -7,6 +7,7 @@ import { PostgresErrorCode } from "src/common/constants";
 import AdminService from "../../modules/user/services/admin.service";
 import RegisterAdminDto from "../dtos/admin/registerAdmin.dto";
 
+@Injectable()
 export default class AdminAuthenticationService {
     constructor(private readonly adminService: AdminService) {}
     async registerAdmin(registerAdminInput: RegisterAdminDto): Promise<User> {
@@ -16,8 +17,8 @@ export default class AdminAuthenticationService {
             const createdUser = await this.adminService.createAdmin({
                 ...registerAdminInput,
                 password: hashedPassword,
+                isEmailConfirmed: true,
             });
-            console.log(createdUser);
 
             return omit(createdUser, userPrivateFields);
         } catch (error) {
@@ -27,6 +28,7 @@ export default class AdminAuthenticationService {
                     HttpStatus.BAD_REQUEST,
                 );
             }
+            console.log(error.message);
             throw new HttpException("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

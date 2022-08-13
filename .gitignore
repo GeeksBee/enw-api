@@ -37,6 +37,7 @@ lerna-debug.log*
 
 .env.development
 .env.test
+.env
 
 # sql_test_scripts
 # references

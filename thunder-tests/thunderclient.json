@@ -113,52 +113,23 @@
     "tests": []
   },
   {
-    "_id": "9450d57e-6582-46fb-b74f-f3ba3bb3c747",
-    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
-    "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
-    "name": "verify admin email",
-    "url": "",
-    "method": "GET",
-    "sortNum": 70000,
-    "created": "2022-07-31T06:04:18.689Z",
-    "modified": "2022-07-31T06:04:18.689Z",
-    "headers": []
-  },
-  {
-    "_id": "db436569-4865-4c80-bbb0-40600750f578",
-    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
-    "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
-    "name": "resend verify admin email",
-    "url": "",
-    "method": "GET",
-    "sortNum": 80000,
-    "created": "2022-07-31T06:05:26.258Z",
-    "modified": "2022-07-31T06:05:26.258Z",
-    "headers": []
-  },
-  {
-    "_id": "f6e8a380-c18b-4268-bd64-860f3e58ac6a",
-    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
-    "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
-    "name": "request reset password",
-    "url": "",
-    "method": "GET",
-    "sortNum": 90000,
-    "created": "2022-07-31T06:06:12.571Z",
-    "modified": "2022-07-31T06:06:12.571Z",
-    "headers": []
-  },
-  {
     "_id": "6214136f-056a-45af-8178-2c31dd074904",
     "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
     "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
-    "name": "reset password",
-    "url": "",
-    "method": "GET",
+    "name": "reset admin password",
+    "url": "{{host}}/authentication/admin/reset-password",
+    "method": "POST",
     "sortNum": 100000,
     "created": "2022-07-31T06:06:46.997Z",
-    "modified": "2022-07-31T06:06:46.997Z",
-    "headers": []
+    "modified": "2022-08-08T19:21:28.543Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"password\": \"{{resetAdminPassword}}\",\n  \"confirmPassword\": \"{{resetAdminPassword}}\" \n}",
+      "form": []
+    },
+    "tests": []
   },
   {
     "_id": "173c152e-0da4-4661-b8ac-dd5e26c98597",
@@ -195,5 +166,57 @@
     "created": "2022-07-31T06:08:18.501Z",
     "modified": "2022-07-31T06:08:18.501Z",
     "headers": []
+  },
+  {
+    "_id": "44d2e8d8-1354-45bb-93a9-f79609cf2fef",
+    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
+    "name": "update admin user",
+    "url": "{{host}}/authentication/admin/register",
+    "method": "PATCH",
+    "sortNum": 80000,
+    "created": "2022-08-08T19:20:00.720Z",
+    "modified": "2022-08-08T19:20:41.383Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"name\": \"{{adminName}}\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "20709320-6f3a-427c-be5b-cddfed10c4c8",
+    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "containerId": "6929d0bb-eb88-4985-9738-06eb2415f7f8",
+    "name": "login admin user",
+    "url": "{{host}}/authentication/admin/login",
+    "method": "POST",
+    "sortNum": 140000,
+    "created": "2022-08-08T19:21:52.513Z",
+    "modified": "2022-08-08T19:22:06.415Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "fcca262f-376d-43db-a67b-e9e007010f21",
+    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "containerId": "6929d0bb-eb88-4985-9738-06eb2415f7f8",
+    "name": "super admin login",
+    "url": "{{host}}/authentication/admin/login",
+    "method": "POST",
+    "sortNum": 70000,
+    "created": "2022-08-08T19:25:49.160Z",
+    "modified": "2022-08-13T10:36:47.411Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"{{superAdminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
