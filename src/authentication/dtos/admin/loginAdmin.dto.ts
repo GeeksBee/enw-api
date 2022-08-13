@@ -1,22 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString, Matches, MinLength } from "class-validator";
-import { Match } from "../../../common/decorators/match.validate.decorator";
 
-class RegisterAdminDto {
+class LoginAdminDto {
     @IsEmail()
     @ApiProperty({
         description: "admin user email",
         example: "john.wick@gmail.com",
     })
     email: string;
-
-    @IsString()
-    @IsNotEmpty()
-    @ApiProperty({
-        description: "admin user name",
-        example: "John Wick",
-    })
-    name: string;
 
     @IsString()
     @IsNotEmpty()
@@ -30,17 +21,6 @@ class RegisterAdminDto {
         example: "AdminUserPassword@69",
     })
     password: string;
-
-    @IsString()
-    @IsNotEmpty()
-    @MinLength(7)
-    @Match<RegisterAdminDto>("password")
-    @ApiProperty({
-        description:
-            "Has to match a password field and regular expression: /((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
-        example: "AdminUserPassword@69",
-    })
-    confirmPassword: string;
 }
 
-export default RegisterAdminDto;
+export default LoginAdminDto;

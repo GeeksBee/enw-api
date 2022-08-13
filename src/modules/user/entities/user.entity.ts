@@ -20,6 +20,7 @@ const roles = Object.values(UserRole).filter((item) => typeof item === "string")
 export type userRoles = typeof roles[number];
 
 export const userPrivateFields = ["password", "isEmailConfirmed", "isPhoneConfirmed"];
+export type userPrivateKeys = "password" | "isEmailConfirmed" | "isPhoneConfirmed";
 
 @Entity({
     name: "enw_user",

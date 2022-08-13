@@ -24,7 +24,9 @@ export class Session {
     })
     valid: boolean;
 
-    @ManyToOne(() => User, (user) => user.sessions)
+    @ManyToOne(() => User, (user) => user.sessions, {
+        onDelete: "CASCADE",
+    })
     @JoinColumn({ name: "user_id" })
     user: User;
 

@@ -24,7 +24,7 @@
     "default": true,
     "sortNum": 10000,
     "created": "2022-07-31T05:47:25.947Z",
-    "modified": "2022-07-31T06:03:47.128Z",
+    "modified": "2022-08-08T19:26:21.409Z",
     "data": [
       {
         "name": "userName",
@@ -57,6 +57,10 @@
       {
         "name": "adminRefreshToken",
         "value": ""
+      },
+      {
+        "name": "superAdminEmail",
+        "value": "admin_1@enw.in"
       }
     ]
   }
