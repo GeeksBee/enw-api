@@ -5,11 +5,12 @@ import AdminAuthenticationService from "../services/admin.auth.service";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
-import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
+import User, { userPrivateFields, UserRole } from "src/modules/user/entities/user.entity";
 import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import LoginAdminDto from "../dtos/admin/loginAdmin.dto";
 import LoginAdminResponseDto from "../dtos/responses/loginAdminResponse.dto";
 import { ApiErrorResponse } from "src/common/decorators/apiResponses/apiErrorRes.decorator";
+import RoleGuard from "../guards/role.guard";
 
 @Controller("authentication/admin")
 export default class AdminAuthenticationController {
@@ -21,7 +22,7 @@ export default class AdminAuthenticationController {
     @Post("register")
     @ApiBody({
         type: RegisterAdminDto,
-        description: "only user with role SUPERADMIN can create admin",
+        description: "Only user with role SUPERADMIN can create admin",
     })
     @ApiErrorResponse(400)
     @ApiResponse({
@@ -30,6 +31,7 @@ export default class AdminAuthenticationController {
         type: User,
     })
     @ApiTags("Authentication")
+    @UseGuards(RoleGuard(UserRole.SUPERADMIN))
     public register(@Body() createAdminData: RegisterAdminDto) {
         return this.adminAuthService.registerAdmin(createAdminData);
     }
