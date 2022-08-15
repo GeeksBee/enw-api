@@ -11,6 +11,8 @@ import LoginAdminDto from "../dtos/admin/loginAdmin.dto";
 import LoginAdminResponseDto from "../dtos/responses/loginAdminResponse.dto";
 import { ApiErrorResponse } from "src/common/decorators/apiResponses/apiErrorRes.decorator";
 import RoleGuard from "../guards/role.guard";
+import { Response } from "express";
+import JwtAuthenticationGuard from "../guards/jwtAuthentication.guard";
 
 @Controller("authentication/admin")
 export default class AdminAuthenticationController {
@@ -19,7 +21,6 @@ export default class AdminAuthenticationController {
         private readonly adminAuthService: AdminAuthenticationService,
     ) {}
 
-    @Post("register")
     @ApiBody({
         type: RegisterAdminDto,
         description: "Only user with role SUPERADMIN can create admin",
@@ -32,13 +33,13 @@ export default class AdminAuthenticationController {
     })
     @ApiTags("Authentication")
     @UseGuards(RoleGuard(UserRole.SUPERADMIN))
+    @Post("register")
     public register(@Body() createAdminData: RegisterAdminDto) {
         return this.adminAuthService.registerAdmin(createAdminData);
     }
 
     @HttpCode(200)
     @UseGuards(LocalAuthenticationGuard)
-    @Post("login")
     @ApiTags("Authentication")
     @ApiBody({ type: LoginAdminDto })
     @ApiResponse({
@@ -46,6 +47,7 @@ export default class AdminAuthenticationController {
         description: "A admin has successfully logged in",
         type: LoginAdminResponseDto,
     })
+    @Post("login")
     public async logIn(@Req() request: RequestWithUser) {
         const user = request.user;
         console.log(user);
