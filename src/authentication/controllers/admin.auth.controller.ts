@@ -6,13 +6,12 @@ import RequestWithUser from "../interfaces/requestWithUser.interface";
 import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
 import User, { userPrivateFields, UserRole } from "src/modules/user/entities/user.entity";
-import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiCookieAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 import LoginAdminDto from "../dtos/admin/loginAdmin.dto";
 import LoginAdminResponseDto from "../dtos/responses/loginAdminResponse.dto";
 import { ApiErrorResponse } from "src/common/decorators/apiResponses/apiErrorRes.decorator";
 import RoleGuard from "../guards/role.guard";
-import { Response } from "express";
-import JwtAuthenticationGuard from "../guards/jwtAuthentication.guard";
+import { apiTags } from "src/common/constants/swagger.constants";
 
 @Controller("authentication/admin")
 export default class AdminAuthenticationController {
@@ -23,7 +22,8 @@ export default class AdminAuthenticationController {
 
     @ApiBody({
         type: RegisterAdminDto,
-        description: "Only user with role SUPERADMIN can create admin",
+        description:
+            "Only user with role SUPERADMIN can create admin, user cred\n email: admin_1@enw.in,\n password: AdminUserPassword@69",
     })
     @ApiErrorResponse(400)
     @ApiResponse({
@@ -31,7 +31,8 @@ export default class AdminAuthenticationController {
         description: "Admin user Creation success",
         type: User,
     })
-    @ApiTags("Authentication")
+    @ApiCookieAuth()
+    @ApiTags(apiTags.Authentication)
     @UseGuards(RoleGuard(UserRole.SUPERADMIN))
     @Post("register")
     public register(@Body() createAdminData: RegisterAdminDto) {
@@ -40,7 +41,7 @@ export default class AdminAuthenticationController {
 
     @HttpCode(200)
     @UseGuards(LocalAuthenticationGuard)
-    @ApiTags("Authentication")
+    @ApiTags(apiTags.Authentication)
     @ApiBody({ type: LoginAdminDto })
     @ApiResponse({
         status: 200,

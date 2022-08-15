@@ -16,7 +16,7 @@ async function bootstrap() {
         .setTitle("Employee News Weekly API v1")
         .setDescription("API for Employee News Weekly portal")
         .setVersion("1.0.0")
-        .addCookieAuth()
+        .addCookieAuth("authentication")
         .build();
     const document = SwaggerModule.createDocument(app, swaggerConfig);
     SwaggerModule.setup("docs", app, document);

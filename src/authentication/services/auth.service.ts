@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
 import UserService from "src/modules/user/services/user.service";
 import * as bcrypt from "bcrypt";
 import { ConfigService } from "@nestjs/config";
@@ -19,6 +19,7 @@ export default class AuthenticationService {
     public async getAuthenticatedUser(email: string, password: string) {
         try {
             const user = await this.userService.getByEmail(email);
+            if (!user) throw new NotFoundException(`user with the email ${email} does not exist`);
             await this.verifyPassword(password, user.password);
             if (!user.isEmailConfirmed)
                 throw new HttpException("email not verified", HttpStatus.FORBIDDEN);
@@ -26,6 +27,7 @@ export default class AuthenticationService {
         } catch (error: any) {
             if (error instanceof HttpException) throw error;
             // TODO test this feature
+            console.log(error); // TODO remove console.log
             throw new HttpException(
                 this.configService.get("internalServerErrorMessage"),
                 HttpStatus.INTERNAL_SERVER_ERROR,
