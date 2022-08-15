@@ -13,6 +13,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { JwtAsyncConfig } from "src/config/jwt.config";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import AuthenticationController from "./controllers/auth.controller";
+import { JwtRefreshTokenStrategy } from "./strategies/jwtRefreshToken.strategy";
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import AuthenticationController from "./controllers/auth.controller";
         AdminAuthenticationService,
         LocalStrategy,
         JwtStrategy,
+        JwtRefreshTokenStrategy,
     ],
 })
 export class AuthenticationModule {}

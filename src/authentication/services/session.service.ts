@@ -23,7 +23,9 @@ export default class SessionService {
         }
     }
     public findSessionById(sessionId: number): Promise<Session> {
-        return this.sessionRepository.findOne(sessionId);
+        return this.sessionRepository.findOne(sessionId, {
+            relations: ["user"],
+        });
     }
     public async invalidateRefreshToken(sessionId: number): Promise<Session> {
         const session = await this.sessionRepository.findOne(sessionId);
