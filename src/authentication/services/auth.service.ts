@@ -34,6 +34,16 @@ export default class AuthenticationService {
             );
         }
     }
+
+    public async getUserIfRefreshTokenMatches(sessionId: number) {
+        const session = await this.sessionService.findSessionById(sessionId);
+        if (!session || !session.valid)
+            throw new HttpException("refresh Token has expired", HttpStatus.UNAUTHORIZED);
+
+        const user = await this.userService.getById(session.user.id);
+        if (user) return user;
+    }
+
     public getCookieWithJwtAccessToken(userId: number) {
         const payload: AccessTokenPayload = { userId };
         const token = this.jwtService.sign(payload, {
@@ -57,6 +67,14 @@ export default class AuthenticationService {
             expiresIn: `${this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRATION_TIME")}s`,
         });
         return token;
+    }
+
+    public async revokeRefreshToken(refreshToken: string) {
+        const decoded: RefreshTokenPayload = this.jwtService.verify(refreshToken, {
+            secret: this.configService.get("JWT_REFRESH_TOKEN_SECRET"),
+        });
+        if (!decoded) return;
+        await this.sessionService.invalidateRefreshToken(decoded.session);
     }
 
     private async verifyPassword(plainTextPassword: string, hashedPassword: string) {
