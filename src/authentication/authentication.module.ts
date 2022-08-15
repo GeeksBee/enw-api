@@ -1,8 +1,6 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "../modules/user/user.module";
-import AdminService from "../modules/user/services/admin.service";
 import SessionService from "./services/session.service";
-import UserService from "../modules/user/services/user.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import Session from "./entities/session.entity";
 import User from "../modules/user/entities/user.entity";
@@ -13,6 +11,8 @@ import { PassportModule } from "@nestjs/passport";
 import { LocalStrategy } from "./strategies/local.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtAsyncConfig } from "src/config/jwt.config";
+import { JwtStrategy } from "./strategies/jwt.strategy";
+import AuthenticationController from "./controllers/auth.controller";
 
 @Module({
     imports: [
@@ -21,7 +21,13 @@ import { JwtAsyncConfig } from "src/config/jwt.config";
         PassportModule,
         JwtModule.registerAsync(JwtAsyncConfig),
     ],
-    controllers: [AdminAuthenticationController],
-    providers: [SessionService, AuthenticationService, AdminAuthenticationService, LocalStrategy],
+    controllers: [AdminAuthenticationController, AuthenticationController],
+    providers: [
+        SessionService,
+        AuthenticationService,
+        AdminAuthenticationService,
+        LocalStrategy,
+        JwtStrategy,
+    ],
 })
 export class AuthenticationModule {}

@@ -43,6 +43,10 @@ export default class AuthenticationService {
         )}`;
     }
 
+    public getCookieForLogOut() {
+        return "Authentication=; HttpOnly; Path=/; Max-Age=0";
+    }
+
     public async getRefreshToken(userId: number) {
         const session = await this.sessionService.createSession(userId);
         const payload: RefreshTokenPayload = { session: session.id };
