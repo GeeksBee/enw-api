@@ -19,14 +19,17 @@ export default class AdminAuthenticationController {
     ) {}
 
     @Post("register")
-    @ApiTags("Authentication")
-    @ApiBody({ type: RegisterAdminDto })
+    @ApiBody({
+        type: RegisterAdminDto,
+        description: "only user with role SUPERADMIN can create admin",
+    })
     @ApiErrorResponse(400)
     @ApiResponse({
         status: 201,
         description: "Admin user Creation success",
         type: User,
     })
+    @ApiTags("Authentication")
     public register(@Body() createAdminData: RegisterAdminDto) {
         return this.adminAuthService.registerAdmin(createAdminData);
     }
