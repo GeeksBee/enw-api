@@ -1,24 +1,22 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import CreateAdminDto from "src/modules/user/dtos/admin/createAdmin.dto";
 import User, { userPrivateFields, UserRole } from "src/modules/user/entities/user.entity";
 import * as bcrypt from "bcrypt";
 import { omit } from "lodash";
 import { PostgresErrorCode } from "src/common/constants";
-import AdminService from "../../modules/user/services/admin.service";
-import RegisterAdminDto from "../dtos/admin/registerAdmin.dto";
+import RequestSignUPDto from "../dtos/employer/requestSignUp.dto";
+import EmployerService from "src/modules/user/services/employer.service";
 
 @Injectable()
-export default class AdminAuthenticationService {
-    constructor(private readonly adminService: AdminService) {}
-    async registerAdmin(registerAdminInput: RegisterAdminDto): Promise<User> {
-        const hashedPassword = await bcrypt.hash(registerAdminInput.password, 10);
+export default class EmployerAuthenticationService {
+    constructor(private readonly employerService: EmployerService) {}
+    async registerEmployer(requestSignUPInput: RequestSignUPDto): Promise<User> {
+        const hashedPassword = await bcrypt.hash(requestSignUPInput.password, 10);
 
         try {
-            const createdUser = await this.adminService.createAdmin({
-                ...registerAdminInput,
+            const createdUser = await this.employerService.createEmployer({
+                ...requestSignUPInput,
                 password: hashedPassword,
-                role: UserRole.ADMIN,
-                isEmailConfirmed: true,
+                role: UserRole.EMPLOYER,
             });
 
             return omit(createdUser, userPrivateFields);

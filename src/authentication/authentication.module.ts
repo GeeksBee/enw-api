@@ -14,6 +14,9 @@ import { JwtAsyncConfig } from "src/config/jwt.config";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import AuthenticationController from "./controllers/auth.controller";
 import { JwtRefreshTokenStrategy } from "./strategies/jwtRefreshToken.strategy";
+import EmployerAuthenticationController from "./controllers/employer.auth.controller";
+import { EmailModule } from "src/email/email.module";
+import EmployerAuthenticationService from "./services/employer.auth.service";
 
 @Module({
     imports: [
@@ -21,12 +24,18 @@ import { JwtRefreshTokenStrategy } from "./strategies/jwtRefreshToken.strategy";
         UserModule,
         PassportModule,
         JwtModule.registerAsync(JwtAsyncConfig),
+        EmailModule,
     ],
-    controllers: [AdminAuthenticationController, AuthenticationController],
+    controllers: [
+        AdminAuthenticationController,
+        EmployerAuthenticationController,
+        AuthenticationController,
+    ],
     providers: [
         SessionService,
         AuthenticationService,
         AdminAuthenticationService,
+        EmployerAuthenticationService,
         LocalStrategy,
         JwtStrategy,
         JwtRefreshTokenStrategy,

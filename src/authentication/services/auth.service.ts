@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
+import {
+    BadRequestException,
+    HttpException,
+    HttpStatus,
+    Injectable,
+    NotFoundException,
+} from "@nestjs/common";
 import UserService from "src/modules/user/services/user.service";
 import * as bcrypt from "bcrypt";
 import { ConfigService } from "@nestjs/config";
@@ -81,6 +87,35 @@ export default class AuthenticationService {
         const isPasswordMatching = await bcrypt.compare(plainTextPassword, hashedPassword);
         if (!isPasswordMatching) {
             throw new HttpException("Wrong credentials provided", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public async confirmEmail(email: string) {
+        const user = await this.userService.getByEmail(email);
+        if (user.isEmailConfirmed) {
+            throw new BadRequestException("Email already confirmed");
+        }
+        await this.userService.markEmailAsConfirmed(email);
+    }
+
+    public async decodeConfirmationToken(token: string, type: "EMAIL" | "PHONE") {
+        const secretType = {
+            EMAIL: this.configService.get<string>("JWT_EMAIL_VERIFICATION_TOKEN_SECRET"),
+        };
+        try {
+            const payload = await this.jwtService.verify(token, {
+                secret: this.configService.get(secretType[type]),
+            });
+
+            if (typeof payload === "object" && "email" in payload) {
+                return payload.email;
+            }
+            throw new BadRequestException();
+        } catch (error) {
+            if (error?.name === "TokenExpiredError") {
+                throw new BadRequestException("Email confirmation token expired");
+            }
+            throw new BadRequestException("Bad confirmation token");
         }
     }
 }

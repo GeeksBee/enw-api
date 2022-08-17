@@ -10,6 +10,7 @@ import configValidationSchema from "./config/configValidationSchema";
 import { LoggerMiddleware } from "./common/middlewares/logRequest.middleware";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { PhoneModule } from "./phone/phone.module";
+import { OrganisationModule } from './modules/organisation/organisation.module';
 import getEnvFilePath from "./common/utils/getEnvFilePath";
 
 @Module({
@@ -25,6 +26,7 @@ import getEnvFilePath from "./common/utils/getEnvFilePath";
         EmailModule,
         AuthenticationModule,
         PhoneModule,
+        OrganisationModule,
     ],
     controllers: [AppController],
     providers: [AppService],

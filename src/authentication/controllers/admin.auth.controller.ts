@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
 import RegisterAdminDto from "../dtos/admin/registerAdmin.dto";
 import { LocalAuthenticationGuard } from "../guards/localAuthentication.guard";
 import AdminAuthenticationService from "../services/admin.auth.service";
@@ -33,7 +33,7 @@ export default class AdminAuthenticationController {
     })
     @ApiCookieAuth()
     @ApiTags(apiTags.Authentication)
-    @UseGuards(RoleGuard(UserRole.SUPERADMIN))
+    @UseGuards(RoleGuard([UserRole.SUPERADMIN]))
     @Post("register")
     public register(@Body() createAdminData: RegisterAdminDto) {
         return this.adminAuthService.registerAdmin(createAdminData);
@@ -48,10 +48,10 @@ export default class AdminAuthenticationController {
         description: "A admin has successfully logged in",
         type: LoginAdminResponseDto,
     })
+    @UseGuards(RoleGuard([UserRole.SUPERADMIN, UserRole.ADMIN]))
     @Post("login")
     public async logIn(@Req() request: RequestWithUser) {
         const user = request.user;
-        console.log(user);
         const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
         const refreshToken = await this.authService.getRefreshToken(user.id);
         request.res.setHeader("Set-Cookie", accessTokenCookie);

@@ -15,6 +15,15 @@ const configValidationSchema = Joi.object({
     JWT_ACCESS_TOKEN_EXPIRATION_TIME: Joi.string().required(),
     JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
     JWT_REFRESH_TOKEN_EXPIRATION_TIME: Joi.string().required(),
+    EMAIL_SERVICE: Joi.string().required(),
+    EMAIL_USER: Joi.string().required(),
+    EMAIL_PASSWORD: Joi.string().required(),
+    EMAIL_HOST: Joi.string().required(),
+    EMAIL_PORT: Joi.number().required(),
+    EMAIL_SECURE: Joi.boolean().required(),
+    EMAIL_CONFIRMATION_URL: Joi.string().required(),
+    JWT_EMAIL_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
+    JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
 });
 
 export default configValidationSchema;
@@ -30,4 +39,13 @@ export type ConfigProps = {
     JWT_ACCESS_TOKEN_EXPIRATION_TIME: string;
     JWT_REFRESH_TOKEN_SECRET: string;
     JWT_REFRESH_TOKEN_EXPIRATION_TIME: string;
+    EMAIL_SERVICE: string;
+    EMAIL_USER: string;
+    EMAIL_PASSWORD: string;
+    EMAIL_HOST: string;
+    EMAIL_PORT: number;
+    EMAIL_SECURE: boolean;
+    EMAIL_CONFIRMATION_URL: string;
+    JWT_EMAIL_VERIFICATION_TOKEN_SECRET: string;
+    JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: string;
 } & publicConfigurationProps;

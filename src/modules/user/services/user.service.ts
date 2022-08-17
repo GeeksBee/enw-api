@@ -40,4 +40,13 @@ export default class UserService {
     public remove(userId: number): Promise<DeleteResult> {
         return this.userRepository.delete(userId);
     }
+
+    async markEmailAsConfirmed(email: string) {
+        return this.userRepository.update(
+            { email },
+            {
+                isEmailConfirmed: true,
+            },
+        );
+    }
 }

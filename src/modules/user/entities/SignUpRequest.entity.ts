@@ -26,9 +26,9 @@ export const userPrivateFields = ["password", "isEmailConfirmed", "isPhoneConfir
 export type userPrivateKeys = "password" | "isEmailConfirmed" | "isPhoneConfirmed";
 
 @Entity({
-    name: "enw_user",
+    name: "enw_signup_request",
 })
-export class User {
+export class SignUpRequest {
     @PrimaryGeneratedColumn({
         name: "user_id",
     })
@@ -36,15 +36,9 @@ export class User {
 
     @Column({
         type: "varchar",
-        nullable: false,
-    })
-    name: string;
-
-    @Column({
-        type: "varchar",
         nullable: true,
     })
-    password: string;
+    content: string;
 
     @Column({
         type: "varchar",
@@ -83,7 +77,8 @@ export class User {
     sessions: Session[];
 
     @OneToOne(() => Organisation, (organisation) => organisation.user)
+    @JoinColumn({ name: "organisation_id" })
     organisation: Organisation;
 }
 
-export default User;
+export default SignUpRequest;
