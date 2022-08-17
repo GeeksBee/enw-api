@@ -1,12 +1,4 @@
-import {
-    Body,
-    Controller,
-    HttpCode,
-    Post,
-    Req,
-    UnauthorizedException,
-    UseGuards,
-} from "@nestjs/common";
+import { Body, Controller, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
 import RegisterAdminDto from "../dtos/admin/registerAdmin.dto";
 import { LocalAuthenticationGuard } from "../guards/localAuthentication.guard";
 import AdminAuthenticationService from "../services/admin.auth.service";

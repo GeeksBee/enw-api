@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 import { UserRole } from "../../entities/user.entity";
 
-class CreateAdminDto {
+class CreateEmployerDto {
     @IsEmail()
     email: string;
 
@@ -15,9 +15,6 @@ class CreateAdminDto {
 
     @IsNotEmpty()
     role: UserRole;
-
-    @IsNotEmpty()
-    isEmailConfirmed: boolean;
 }
 
-export default CreateAdminDto;
+export default CreateEmployerDto;

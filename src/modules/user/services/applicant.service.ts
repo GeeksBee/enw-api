@@ -2,14 +2,14 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import CreateAdminDto from "../dtos/admin/createAdmin.dto";
-import User from "../entities/user.entity";
+import User, { UserRole } from "../entities/user.entity";
 
 @Injectable()
 export default class AdminService {
-    constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
+    constructor(@InjectRepository(User) protected readonly userRepository: Repository<User>) {}
 
     public createAdmin(createAdminDto: CreateAdminDto): Promise<User> {
-        const admin = this.userRepository.create(createAdminDto);
+        const admin = this.userRepository.create({ ...createAdminDto, role: UserRole.ADMIN });
         return this.userRepository.save(admin);
     }
 }
