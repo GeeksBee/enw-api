@@ -24,6 +24,8 @@ const configValidationSchema = Joi.object({
     EMAIL_CONFIRMATION_URL: Joi.string().required(),
     JWT_EMAIL_VERIFICATION_TOKEN_SECRET: Joi.string().required(),
     JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
+    PHONE_VERIFICATION_SECRET: Joi.string().required(),
+    PHONE_VERIFICATION_EXPIRATION_TIME: Joi.string().required(),
 });
 
 export default configValidationSchema;
@@ -48,4 +50,6 @@ export type ConfigProps = {
     EMAIL_CONFIRMATION_URL: string;
     JWT_EMAIL_VERIFICATION_TOKEN_SECRET: string;
     JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: string;
+    PHONE_VERIFICATION_SECRET: string;
+    PHONE_VERIFICATION_EXPIRATION_TIME: string;
 } & publicConfigurationProps;

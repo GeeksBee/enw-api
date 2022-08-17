@@ -1,18 +1,9 @@
 import { Module } from "@nestjs/common";
+import OtpService from "./otp.service";
 import SmsService from "./sms.service";
 
 @Module({
-    providers: [
-        {
-            provide: "SmsServiceInterface",
-            useClass: SmsService,
-        },
-    ],
-    exports: [
-        {
-            provide: "SmsServiceInterface",
-            useClass: SmsService,
-        },
-    ],
+    providers: [SmsService, OtpService],
+    exports: [SmsService, OtpService],
 })
 export class PhoneModule {}
