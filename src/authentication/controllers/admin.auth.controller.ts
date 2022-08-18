@@ -48,7 +48,7 @@ export default class AdminAuthenticationController {
         description: "A admin has successfully logged in",
         type: LoginAdminResponseDto,
     })
-    @UseGuards(RoleGuard([UserRole.SUPERADMIN, UserRole.ADMIN]))
+    // @UseGuards(RoleGuard([UserRole.SUPERADMIN, UserRole.ADMIN]))
     @Post("login")
     public async logIn(@Req() request: RequestWithUser) {
         const user = request.user;
