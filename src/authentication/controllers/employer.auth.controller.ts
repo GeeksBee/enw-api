@@ -54,7 +54,6 @@ export default class EmployerAuthenticationController {
         type: LoginAdminResponseDto,
     })
     @UseGuards(LocalAuthenticationGuard)
-    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     @Post("login")
     public async logIn(@Req() request: RequestWithUser) {
         const user = request.user;

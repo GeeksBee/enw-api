@@ -11,6 +11,7 @@ import { LoggerMiddleware } from "./common/middlewares/logRequest.middleware";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { PhoneModule } from "./phone/phone.module";
 import { OrganisationModule } from './modules/organisation/organisation.module';
+import { PaymentModule } from './payment/payment.module';
 import getEnvFilePath from "./common/utils/getEnvFilePath";
 
 @Module({
@@ -27,6 +28,7 @@ import getEnvFilePath from "./common/utils/getEnvFilePath";
         AuthenticationModule,
         PhoneModule,
         OrganisationModule,
+        PaymentModule,
     ],
     controllers: [AppController],
     providers: [AppService],
