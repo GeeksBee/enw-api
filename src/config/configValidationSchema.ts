@@ -26,6 +26,9 @@ const configValidationSchema = Joi.object({
     JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: Joi.string().required(),
     PHONE_VERIFICATION_SECRET: Joi.string().required(),
     PHONE_VERIFICATION_EXPIRATION_TIME: Joi.string().required(),
+    RAZORPAY_KEY_ID: Joi.string().required(),
+    RAZORPAY_KEY_SECRET: Joi.string().required(),
+    RAZORPAY_WEBHOOK_SECRET: Joi.string().required(),
 });
 
 export default configValidationSchema;
@@ -52,4 +55,7 @@ export type ConfigProps = {
     JWT_EMAIL_VERIFICATION_TOKEN_EXPIRATION_TIME: string;
     PHONE_VERIFICATION_SECRET: string;
     PHONE_VERIFICATION_EXPIRATION_TIME: string;
+    RAZORPAY_KEY_ID: string;
+    RAZORPAY_KEY_SECRET: string;
+    RAZORPAY_WEBHOOK_SECRET: string;
 } & publicConfigurationProps;

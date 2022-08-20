@@ -12,6 +12,8 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { PhoneModule } from "./phone/phone.module";
 import { OrganisationModule } from './modules/organisation/organisation.module';
 import { PaymentModule } from './payment/payment.module';
+import { JobModule } from './modules/job/job.module';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import getEnvFilePath from "./common/utils/getEnvFilePath";
 
 @Module({
@@ -29,6 +31,8 @@ import getEnvFilePath from "./common/utils/getEnvFilePath";
         PhoneModule,
         OrganisationModule,
         PaymentModule,
+        JobModule,
+        UserProfileModule,
     ],
     controllers: [AppController],
     providers: [AppService],

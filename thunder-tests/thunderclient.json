@@ -136,12 +136,14 @@
     "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
     "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
     "name": "get current logged in admin user",
-    "url": "",
+    "url": "{{host}}/authentication/me",
     "method": "GET",
     "sortNum": 110000,
     "created": "2022-07-31T06:07:00.056Z",
-    "modified": "2022-07-31T06:07:00.056Z",
-    "headers": []
+    "modified": "2022-08-20T13:18:10.684Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   },
   {
     "_id": "abf7dfc7-a883-4881-9d62-9b670926c973",
@@ -215,6 +217,101 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"email\": \"{{superAdminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b554c0fe-0ca3-4e09-bd8d-a5b970015145",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "applicant pay subscription",
+    "url": "{{host}}/payment/applicant/subscribe-notification",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-08-20T05:34:38.698Z",
+    "modified": "2022-08-20T06:14:12.492Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d9d6dd09-f14f-4083-a3d1-8455603309bb",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "applicant pay newsletter",
+    "url": "payment/applicant/subscribe-newsletter",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-08-20T05:36:34.515Z",
+    "modified": "2022-08-20T05:36:48.862Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "da787cf3-3a17-4822-a862-180aac890280",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "employer pay newsletter job advert",
+    "url": "payment/employeer/job-advertisement",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-08-20T05:37:08.795Z",
+    "modified": "2022-08-20T05:37:55.046Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "3d30f41d-372d-4875-a3d9-288533a47f29",
+    "colId": "65cf23ea-8858-40fd-a032-83a8bf032a88",
+    "containerId": "43a376c9-9194-4d4d-9328-197e85ebd962",
+    "name": "get all org types",
+    "url": "{{host}}/organisation/type",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-08-20T08:47:36.270Z",
+    "modified": "2022-08-20T08:47:46.800Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "f7fbdb4c-e01d-45c8-ad18-94b94390e3b0",
+    "colId": "65cf23ea-8858-40fd-a032-83a8bf032a88",
+    "containerId": "43a376c9-9194-4d4d-9328-197e85ebd962",
+    "name": "get all org types Copy",
+    "url": "{{host}}/organisation/type/{typeId}/attribute",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-08-20T12:11:45.620Z",
+    "modified": "2022-08-20T12:12:46.784Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "typeId",
+        "value": "1",
+        "isPath": true
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f0c83ddc-be30-4d8a-ae8f-e96f047b7d7d",
+    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "containerId": "4847a7c9-01cd-45be-9a38-f93d9c48db08",
+    "name": "login employer",
+    "url": "{{host}}/authentication/employer/login",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-08-20T13:14:14.756Z",
+    "modified": "2022-08-20T13:19:41.580Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"employer_1@gmail.com\",\n  \"password\": \"{{adminPassword}}\"\n}",
       "form": []
     },
     "tests": []

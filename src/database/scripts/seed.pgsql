@@ -1,5 +1,8 @@
 delete from "enw_session";
 delete from "enw_user";
+delete from "enw_organisation_type";
+delete from "enw_organisation_attribute";
+delete from "enw_organisation_types_on_organisation_attributes";
 
 INSERT INTO "enw_user" 
 ("name", "email", "password","role","is_email_confirmed")
@@ -11,7 +14,12 @@ INSERT INTO "enw_user"
 VALUES 
 ('Employer 1', 'employer_1@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '2', TRUE);
 
-SELECT * FROM "enw_user";
+
+
+
+
+-- DROP TABLE  "organisation_type_id";
+
 
 -- select n.nspname as enum_schema,  
 --     t.typname as enum_name,
