@@ -218,5 +218,81 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "b554c0fe-0ca3-4e09-bd8d-a5b970015145",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "applicant pay subscription",
+    "url": "{{host}}/payment/applicant/subscribe-notification",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-08-20T05:34:38.698Z",
+    "modified": "2022-08-20T06:14:12.492Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d9d6dd09-f14f-4083-a3d1-8455603309bb",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "applicant pay newsletter",
+    "url": "payment/applicant/subscribe-newsletter",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-08-20T05:36:34.515Z",
+    "modified": "2022-08-20T05:36:48.862Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "da787cf3-3a17-4822-a862-180aac890280",
+    "colId": "2095fe85-9767-4da6-81e6-5cc18d901db6",
+    "containerId": "",
+    "name": "employer pay newsletter job advert",
+    "url": "payment/employeer/job-advertisement",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-08-20T05:37:08.795Z",
+    "modified": "2022-08-20T05:37:55.046Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "3d30f41d-372d-4875-a3d9-288533a47f29",
+    "colId": "65cf23ea-8858-40fd-a032-83a8bf032a88",
+    "containerId": "43a376c9-9194-4d4d-9328-197e85ebd962",
+    "name": "get all org types",
+    "url": "{{host}}/organisation/type",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-08-20T08:47:36.270Z",
+    "modified": "2022-08-20T08:47:46.800Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "f7fbdb4c-e01d-45c8-ad18-94b94390e3b0",
+    "colId": "65cf23ea-8858-40fd-a032-83a8bf032a88",
+    "containerId": "43a376c9-9194-4d4d-9328-197e85ebd962",
+    "name": "get all org types Copy",
+    "url": "{{host}}/organisation/type/{typeId}/attribute",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-08-20T12:11:45.620Z",
+    "modified": "2022-08-20T12:12:46.784Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "typeId",
+        "value": "1",
+        "isPath": true
+      }
+    ],
+    "tests": []
   }
 ]
