@@ -136,12 +136,14 @@
     "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
     "containerId": "62b27861-2ad0-459f-8141-3261f29e0f3b",
     "name": "get current logged in admin user",
-    "url": "",
+    "url": "{{host}}/authentication/me",
     "method": "GET",
     "sortNum": 110000,
     "created": "2022-07-31T06:07:00.056Z",
-    "modified": "2022-07-31T06:07:00.056Z",
-    "headers": []
+    "modified": "2022-08-20T13:18:10.684Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   },
   {
     "_id": "abf7dfc7-a883-4881-9d62-9b670926c973",
@@ -293,6 +295,25 @@
         "isPath": true
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "f0c83ddc-be30-4d8a-ae8f-e96f047b7d7d",
+    "colId": "d6db51a8-eabb-4d8f-98e1-404842abbae1",
+    "containerId": "4847a7c9-01cd-45be-9a38-f93d9c48db08",
+    "name": "login employer",
+    "url": "{{host}}/authentication/employer/login",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-08-20T13:14:14.756Z",
+    "modified": "2022-08-20T13:19:41.580Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"employer_1@gmail.com\",\n  \"password\": \"{{adminPassword}}\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

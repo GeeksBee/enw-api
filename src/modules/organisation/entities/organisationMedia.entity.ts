@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Organisation from "./organisation.entity";
 
 export enum OrganisationMediaType {
     LOGO,
@@ -28,6 +29,10 @@ export class OrganisationMedia {
         nullable: false,
     })
     link: string;
+
+    @ManyToOne(() => Organisation, (org) => org.media)
+    @JoinColumn({ name: "organisation_id" })
+    organisation: Organisation;
 }
 
 export default OrganisationMediaType;
