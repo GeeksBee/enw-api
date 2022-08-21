@@ -1,13 +1,16 @@
 class Twilio {
-    constructor(accountSid: string, authToken: string) {
+    private;
+    messages: Messages;
+
+    constructor(private accountSid: string, private authToken: string) {
+        this.messages = new Messages();
         return this;
     }
-
-    messages: Messages;
 }
 
 class Messages {
-    create(props: { body: string; from: string; to: string }): Promise<string> {
+    constructor() {}
+    public create(props: { body: string; from: string; to: string }): Promise<string> {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(props.body);
