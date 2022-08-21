@@ -41,7 +41,7 @@ export class EmailService {
         });
     }
 
-    public sendVerificationLink(email: string) {
+    public async sendVerificationLink(email: string) {
         const payload: VerificationTokenPayload = { email };
         const token = this.jwtService.sign(payload, {
             secret: this.configService.get<string>("JWT_EMAIL_VERIFICATION_TOKEN_SECRET"),
@@ -51,10 +51,11 @@ export class EmailService {
         });
         const url = `${this.configService.get<string>("EMAIL_CONFIRMATION_URL")}?token=${token}`;
         const text = `Welcome to the Employees News Weekly. \nTo confirm the email address, click here: ${url}`;
-        return this.sendMail({
+        await this.sendMail({
             to: email,
             subject: "Email Confirmation",
             text,
         });
+        return token;
     }
 }

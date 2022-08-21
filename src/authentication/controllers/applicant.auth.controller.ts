@@ -43,6 +43,8 @@ export default class ApplicantAuthenticationController {
         });
         this.logger.log(`message sent : ${message}`);
 
+        response.setHeader("debug-otp", otp); // TODO to be removed
+
         // get user with the phone number
         const user = await this.userService.getByPhone(phone);
 

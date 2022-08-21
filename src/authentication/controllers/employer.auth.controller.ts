@@ -16,6 +16,7 @@ import EmployerAuthenticationService from "../services/employer.auth.service";
 import { EmailService } from "src/email/email.service";
 import ConfirmEmailDto from "../dtos/confirmEmail.dto";
 import { OrganisationService } from "src/modules/organisation/organisation.service";
+import { Request } from "express";
 
 @Controller("authentication/employer")
 export default class EmployerAuthenticationController {
@@ -38,9 +39,12 @@ export default class EmployerAuthenticationController {
     @Post("/request-signup")
     public async requestSignUp(
         @Body() requestSignUPDto: RequestSignUPDto,
-    ): Promise<SuccessMessage> {
+        @Req() request: Request,
+    ) {
         const employer = await this.employerAuthService.registerEmployer(requestSignUPDto);
-        this.emailService.sendVerificationLink(employer.email);
+        const token = await this.emailService.sendVerificationLink(employer.email);
+        request.res.setHeader("debug-token", token); // TODO to be removed
+
         return {
             statusCode: 200,
             message: "SignUp request send successfully, check mail to find the link to register",
