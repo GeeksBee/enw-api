@@ -8,19 +8,20 @@ import { UserRole } from "../user/entities/user.entity";
 import { UpdateOrganisationDto } from "./dtos/update-org.dto";
 import { OrganisationService } from "./organisation.service";
 
-@UseGuards(JwtAuthenticationGuard)
 @Controller("organisation")
 export class OrganisationController {
     constructor(private readonly organisationService: OrganisationService) {}
 
     @ApiTags(apiTags.Organisation)
     @Get("type")
+    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     public getAllOrganisationTypes() {
         return this.organisationService.getAllOrganisationType();
     }
 
     @Get("")
     @ApiTags(apiTags.Organisation)
+    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     public getOrganisation(@Req() request: RequestWithUser) {
         const user = request.user;
         return this.organisationService.getOrganisationByUserId(user.id);

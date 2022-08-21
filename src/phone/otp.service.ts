@@ -2,8 +2,9 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as otpGenerator from "otp-generator";
 import { ConfigProps } from "src/config/configValidationSchema";
-import crypto from "crypto";
+
 import { VerifyOtpDto } from "src/authentication/dtos/applicant/verifyOtp.dto";
+import { createHmac } from "crypto";
 
 @Injectable()
 export default class OtpService {
@@ -23,13 +24,18 @@ export default class OtpService {
         });
     }
 
-    public createOtpHash(otp: string, phone: string, expires?: number) {
-        if (!expires)
-            expires =
-                Date.now() + this.configService.get<number>("PHONE_VERIFICATION_EXPIRATION_TIME");
+    public createOtpHash(otp: string, phone: string, expires?: string) {
+        if (!expires) {
+            expires = String(
+                Date.now() + this.configService.get<number>("PHONE_VERIFICATION_EXPIRATION_TIME"),
+            );
+        }
+
         const data = `${phone}.${otp}.${expires}`;
-        const hash = crypto
-            .createHmac("sha256", this.configService.get<string>("PHONE_VERIFICATION_SECRET"))
+        const hash = createHmac(
+            "sha256",
+            this.configService.get<string>("PHONE_VERIFICATION_SECRET"),
+        )
             .update(data)
             .digest("hex");
         return `${hash}.${expires}`;
@@ -41,6 +47,7 @@ export default class OtpService {
         if (Date.now() > parseInt(expires)) {
             throw new HttpException("Otp Expired", HttpStatus.FORBIDDEN);
         }
-        return hashValue === this.createOtpHash(otp, phone, Number(expires)).split(".")[0];
+        const compareHash = this.createOtpHash(otp, phone, expires).split(".")[0];
+        return hashValue === compareHash;
     }
 }
