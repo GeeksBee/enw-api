@@ -19,6 +19,7 @@ import { EmailModule } from "src/email/email.module";
 import EmployerAuthenticationService from "./services/employer.auth.service";
 import { PhoneModule } from "src/phone/phone.module";
 import ApplicantAuthenticationController from "./controllers/applicant.controller";
+import { OrganisationModule } from "src/modules/organisation/organisation.module";
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import ApplicantAuthenticationController from "./controllers/applicant.controlle
         JwtModule.registerAsync(JwtAsyncConfig),
         EmailModule,
         PhoneModule,
+        OrganisationModule,
     ],
     controllers: [
         AdminAuthenticationController,

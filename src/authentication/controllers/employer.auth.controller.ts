@@ -15,6 +15,7 @@ import LoginEmployerDto from "../dtos/employer/loginEmployer.dto";
 import EmployerAuthenticationService from "../services/employer.auth.service";
 import { EmailService } from "src/email/email.service";
 import ConfirmEmailDto from "../dtos/confirmEmail.dto";
+import { OrganisationService } from "src/modules/organisation/organisation.service";
 
 @Controller("authentication/employer")
 export default class EmployerAuthenticationController {
@@ -22,6 +23,7 @@ export default class EmployerAuthenticationController {
         private readonly authService: AuthenticationService,
         private readonly employerAuthService: EmployerAuthenticationService,
         private readonly emailService: EmailService,
+        private readonly orgService: OrganisationService,
     ) {}
 
     // route to request joining
@@ -71,12 +73,15 @@ export default class EmployerAuthenticationController {
         description: "The Employer has successfully logged in",
         type: LoginAdminResponseDto,
     })
+    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     @Post("email-confirmation")
-    async confirm(@Body() confirmationData: ConfirmEmailDto) {
+    async confirm(@Body() confirmationData: ConfirmEmailDto, @Req() request: RequestWithUser) {
+        const userId = request.user.id;
         const email = await this.authService.decodeConfirmationToken(
             confirmationData.token,
             "EMAIL",
         );
         await this.authService.confirmEmail(email);
+        await this.orgService.createOrganisation(userId);
     }
 }
