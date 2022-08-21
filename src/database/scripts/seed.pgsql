@@ -1,19 +1,16 @@
+delete from "enw_organisation_media";
+delete from "enw_organisation";
+delete from "enw_payment";
 delete from "enw_session";
 delete from "enw_user";
-delete from "enw_organisation_type";
-delete from "enw_organisation_attribute";
-delete from "enw_organisation_types_on_organisation_attributes";
+
 
 INSERT INTO "enw_user" 
 ("name", "email", "password","role","is_email_confirmed")
 VALUES 
-('Super Admin', 'admin_1@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '0', TRUE);
-
-INSERT INTO "enw_user" 
-("name", "email", "password","role","is_email_confirmed")
-VALUES 
+('Super Admin', 'superadmin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '0', TRUE),
+('Admin', 'admin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '1', TRUE),
 ('Employer 1', 'employer_1@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '2', TRUE);
-
 
 
 

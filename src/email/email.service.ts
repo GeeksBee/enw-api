@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { createTransport, SendMailOptions } from "nodemailer";
+import { createTransport, SendMailOptions, getTestMessageUrl } from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import { ConfigProps } from "src/config/configValidationSchema";
 import { VerificationTokenPayload } from "./interfaces/VerificationTokenPayload.interface";
@@ -28,10 +28,16 @@ export class EmailService {
     public sendMail(payload: SendMailOptions) {
         return this.nodeMailerTransporter.sendMail(payload, (err, info) => {
             if (err) {
-                this.logger.error(err, "Error Sending email", undefined, EmailService.name);
+                this.logger.error(
+                    err,
+                    `Error Sending email ${err.message}`,
+                    undefined,
+                    EmailService.name,
+                );
                 return;
             }
-            this.logger.log(`Preview url: ${info}`);
+            this.logger.log(`Message sent: ${info.messageId}`);
+            this.logger.log(`Preview url: ${getTestMessageUrl(info)}`);
         });
     }
 

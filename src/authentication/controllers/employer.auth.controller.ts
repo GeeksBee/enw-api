@@ -73,15 +73,13 @@ export default class EmployerAuthenticationController {
         description: "The Employer has successfully logged in",
         type: LoginAdminResponseDto,
     })
-    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     @Post("email-confirmation")
-    async confirm(@Body() confirmationData: ConfirmEmailDto, @Req() request: RequestWithUser) {
-        const userId = request.user.id;
+    async confirm(@Body() confirmationData: ConfirmEmailDto) {
         const email = await this.authService.decodeConfirmationToken(
             confirmationData.token,
             "EMAIL",
         );
         await this.authService.confirmEmail(email);
-        await this.orgService.createOrganisation(userId);
+        await this.orgService.createOrganisation(email);
     }
 }

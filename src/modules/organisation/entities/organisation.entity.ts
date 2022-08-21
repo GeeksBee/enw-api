@@ -52,7 +52,25 @@ export class Organisation {
         type: "varchar",
         nullable: true,
     })
-    CompanyRegistrationNumber: string;
+    companyRegistrationNumber: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
+    location: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
+    address: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
+    industry: string;
 
     // end details
 
