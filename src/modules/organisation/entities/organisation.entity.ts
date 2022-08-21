@@ -12,7 +12,9 @@ import {
 import { OrganisationMedia } from "./organisationMedia.entity";
 import OrganisationTypeEnum from "./organisationType.enum";
 
+@Entity()
 export class Organisation {
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({
@@ -65,7 +67,6 @@ export class Organisation {
         nullable: true,
     })
     industry: string;
-
 
     // end details
 

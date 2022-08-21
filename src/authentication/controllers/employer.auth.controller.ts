@@ -1,15 +1,12 @@
 import { Body, Controller, HttpCode, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/common/constants/swagger.constants";
-import { userPrivateFields, UserRole } from "src/modules/user/entities/user.entity";
-import LoginAdminDto from "../dtos/admin/loginAdmin.dto";
+import { userPrivateFields } from "src/modules/user/entities/user.entity";
 import LoginAdminResponseDto from "../dtos/responses/loginAdminResponse.dto";
 import { LocalAuthenticationGuard } from "../guards/localAuthentication.guard";
-import RoleGuard from "../guards/role.guard";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
-import { SuccessMessage } from "src/common/interfaces/successMessage";
 import RequestSignUPDto from "../dtos/employer/requestSignUp.dto";
 import LoginEmployerDto from "../dtos/employer/loginEmployer.dto";
 import EmployerAuthenticationService from "../services/employer.auth.service";
