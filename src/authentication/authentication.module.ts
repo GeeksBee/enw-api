@@ -18,7 +18,9 @@ import EmployerAuthenticationController from "./controllers/employer.auth.contro
 import { EmailModule } from "src/email/email.module";
 import EmployerAuthenticationService from "./services/employer.auth.service";
 import { PhoneModule } from "src/phone/phone.module";
-import ApplicantAuthenticationController from "./controllers/applicant.controller";
+import ApplicantAuthenticationController from "./controllers/applicant.auth.controller";
+import { OrganisationModule } from "src/modules/organisation/organisation.module";
+import ApplicantAuthenticationService from "./services/applicant.auth.service";
 
 @Module({
     imports: [
@@ -28,6 +30,7 @@ import ApplicantAuthenticationController from "./controllers/applicant.controlle
         JwtModule.registerAsync(JwtAsyncConfig),
         EmailModule,
         PhoneModule,
+        OrganisationModule,
     ],
     controllers: [
         AdminAuthenticationController,
@@ -40,6 +43,7 @@ import ApplicantAuthenticationController from "./controllers/applicant.controlle
         AuthenticationService,
         AdminAuthenticationService,
         EmployerAuthenticationService,
+        ApplicantAuthenticationService,
         LocalStrategy,
         JwtStrategy,
         JwtRefreshTokenStrategy,

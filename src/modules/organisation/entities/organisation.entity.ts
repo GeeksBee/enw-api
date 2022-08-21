@@ -55,10 +55,17 @@ export class Organisation {
     location: string;
 
     @Column({
-        type: "int2",
+        type: "varchar",
         nullable: true,
     })
-    companySize: string;
+    address: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
+    industry: string;
+
 
     // end details
 

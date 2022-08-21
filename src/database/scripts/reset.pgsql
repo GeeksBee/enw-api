@@ -1,0 +1,12 @@
+drop table "enw_organisation_media";
+drop table "enw_organisation_attribute_value";
+drop table "enw_organisation_types_on_organisation_attributes";
+drop table "enw_organisation_attribute";
+drop table "enw_organisation_type";
+drop table "enw_payment";
+drop table "enw_session";
+drop table "enw_signup_request";
+drop table "enw_user";
+drop table "enw_organisation";
+drop table "migration";
+drop table "typeorm_metadata";

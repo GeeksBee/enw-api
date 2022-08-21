@@ -5,16 +5,16 @@ import { Match } from "../../../common/decorators/match.validate.decorator";
 class RequestSignUPDto {
     @IsEmail()
     @ApiProperty({
-        description: "admin user email",
-        example: "john.wick@gmail.com",
+        description: "employer user email",
+        example: "employer.one@gmail.com",
     })
     email: string;
 
     @IsString()
     @IsNotEmpty()
     @ApiProperty({
-        description: "admin user name",
-        example: "John Wick",
+        description: "employer user name",
+        example: "Indiana Jones",
     })
     name: string;
 

@@ -3,4 +3,6 @@ export const apiTags = {
     Payment: "Payment",
     Organisation: "Organisation",
     Job: "Job",
+    UserProfile: "UserProfile",
+    SuperAdmin: "SuperAdmin",
 };
