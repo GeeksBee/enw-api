@@ -7,6 +7,7 @@ export enum OrganisationMediaType {
     IMAGE,
 }
 
+@Entity()
 export class OrganisationMedia {
     @PrimaryGeneratedColumn({
         name: "organisation_media_id",
