@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
-import { CreateJobDto } from './dto/create-job.dto';
-import { UpdateJobDto } from './dto/update-job.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateJobDto } from "./dto/create-job.dto";
+import { UpdateJobDto } from "./dto/update-job.dto";
+import { Job } from "./entities/job.entity";
 
 @Injectable()
 export class JobService {
-  create(createJobDto: CreateJobDto) {
-    return 'This action adds a new job';
-  }
+    async create(createJobDto: CreateJobDto) {
+        const job = Job.create(createJobDto);
+        await Job.save(job);
 
-  findAll() {
-    return `This action returns all job`;
-  }
+        // Send Email and notifications to right candidate
+        return job;
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} job`;
-  }
+    async findAll() {
+        const jobs = await Job.find();
+        return jobs;
+    }
 
-  update(id: number, updateJobDto: UpdateJobDto) {
-    return `This action updates a #${id} job`;
-  }
+    async findOne(id: number) {
+        const job = await Job.findOneOrFail({
+            where: { id },
+        });
+        return job;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} job`;
-  }
+    async update(id: number, updateJobDto: any) {
+        let job = await Job.findOneOrFail({
+            where: {
+                id,
+            },
+        });
+
+        job = {
+            ...job,
+            ...updateJobDto,
+        };
+
+        await Job.save(job);
+        return job;
+    }
+
+    async remove(id: number) {
+        const job = await Job.findOneOrFail({
+            where: {
+                id,
+            },
+        });
+
+        await Job.softRemove(job);
+        return job;
+    }
 }

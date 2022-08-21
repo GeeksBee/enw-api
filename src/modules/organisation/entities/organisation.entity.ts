@@ -12,13 +12,7 @@ import {
 import { OrganisationMedia } from "./organisationMedia.entity";
 import OrganisationTypeEnum from "./organisationType.enum";
 
-@Entity({
-    name: "enw_organisation",
-})
 export class Organisation {
-    @PrimaryGeneratedColumn({
-        name: "organisation_id",
-    })
     id: number;
 
     @Column({
@@ -72,6 +66,7 @@ export class Organisation {
     })
     industry: string;
 
+
     // end details
 
     @Column({
@@ -88,10 +83,10 @@ export class Organisation {
     @OneToMany(() => OrganisationMedia, (media) => media.organisation) // specify inverse side as a second parameter
     media: OrganisationMedia[];
 
-    @CreateDateColumn({ name: "created_at" })
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn({ name: "updated_at" })
+    @UpdateDateColumn()
     updatedAt: Date;
 }
 
