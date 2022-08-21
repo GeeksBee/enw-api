@@ -29,12 +29,8 @@ export default class UserService {
     }
     public async verifyPhone(userId: number): Promise<User> {
         const user = await this.userRepository.findOne(userId);
-        if (!user.isPhoneConfirmed) {
-            user.isPhoneConfirmed = true;
-            return this.userRepository.save(user);
-        } else {
-            throw new EmailAlreadyVerified();
-        }
+        user.isPhoneConfirmed = true;
+        return this.userRepository.save(user);
     }
 
     public remove(userId: number): Promise<DeleteResult> {

@@ -64,8 +64,8 @@ export default class ApplicantAuthenticationController {
     public async verifyOTP(@Body() verifyOtpData: VerifyOtpDto, @Res() response: Response) {
         const isValidOtp = this.otpService.verifyOTP(verifyOtpData);
         if (isValidOtp) {
-            const user = await this.userService.getByPhone(verifyOtpData.phone);
-            await this.userService.verifyPhone(user.id);
+            let user = await this.userService.getByPhone(verifyOtpData.phone);
+            if (!user.isPhoneConfirmed) user = await this.userService.verifyPhone(user.id);
             const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
             const refreshToken = await this.authService.getRefreshToken(user.id);
             response.setHeader("Set-Cookie", accessTokenCookie);
