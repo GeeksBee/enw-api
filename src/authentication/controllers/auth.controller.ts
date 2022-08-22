@@ -23,8 +23,13 @@ export default class AuthenticationController {
     refresh(@Req() request: RequestWithUser) {
         const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(request.user.id);
 
-        request.res.setHeader("Set-Cookie", accessTokenCookie);
-        return omit(request.user, userPrivateFields);
+        request.res.setHeader("Set-Cookie", accessTokenCookie.cookie);
+        request.res.setHeader("Set-Cookie", accessTokenCookie.cookie);
+        return {
+            user: omit(request.user, userPrivateFields),
+
+            accessToken: accessTokenCookie.token,
+        };
     }
 
     @ApiTags(apiTags.Authentication)

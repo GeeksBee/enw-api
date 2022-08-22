@@ -9,6 +9,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import Organisation from "src/modules/organisation/entities/organisation.entity";
+import { UserProfile } from "src/modules/user-profile/entities/user-profile.entity";
 
 export enum UserRole {
     SUPERADMIN,
@@ -83,6 +84,9 @@ export class User {
 
     @OneToOne(() => Organisation, (organisation) => organisation.user)
     organisation: Organisation;
+
+    @OneToOne(() => UserProfile, (userProfile) => userProfile.user)
+    userProfile: UserProfile;
 }
 
 export default User;

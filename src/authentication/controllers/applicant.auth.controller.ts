@@ -70,9 +70,12 @@ export default class ApplicantAuthenticationController {
             if (!user.isPhoneConfirmed) user = await this.userService.verifyPhone(user.id);
             const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
             const refreshToken = await this.authService.getRefreshToken(user.id);
-            response.setHeader("Set-Cookie", accessTokenCookie);
-
-            return response.status(200).send({ user: omit(user, userPrivateFields), refreshToken });
+            response.setHeader("Set-Cookie", accessTokenCookie.cookie);
+            return response.status(200).send({
+                user: omit(user, userPrivateFields),
+                refreshToken,
+                accessToken: accessTokenCookie.token,
+            });
         } else {
             throw new HttpException("Invalid OTP", HttpStatus.FORBIDDEN);
         }
