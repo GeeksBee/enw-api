@@ -6,7 +6,7 @@ import { Request } from "express";
 import UserService from "src/modules/user/services/user.service";
 import { AccessTokenPayload } from "../interfaces/tokenPayload.interface";
 import { ConfigProps } from "src/config/configValidationSchema";
-
+// const pattern = /?<= \.+/;
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(
@@ -16,6 +16,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             jwtFromRequest: ExtractJwt.fromExtractors([
                 (request: Request) => {
+                    // return pattern.e;
+                    // return request?.headers?.authorization.split(" ")[1];
                     return request?.cookies?.Authentication;
                 },
             ]),

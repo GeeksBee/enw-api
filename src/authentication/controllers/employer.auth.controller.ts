@@ -62,8 +62,12 @@ export default class EmployerAuthenticationController {
         const user = request.user;
         const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
         const refreshToken = await this.authService.getRefreshToken(user.id);
-        request.res.setHeader("Set-Cookie", accessTokenCookie);
-        return { user: omit(user, userPrivateFields), refreshToken };
+        request.res.setHeader("Set-Cookie", accessTokenCookie.cookie);
+        return {
+            user: omit(user, userPrivateFields),
+            refreshToken,
+            accessToken: accessTokenCookie.token,
+        };
     }
 
     @HttpCode(200)
