@@ -18,4 +18,6 @@ VALUES
 INSERT INTO "organisation"
 ("id", "description", "organisation_type", "gstNumber", "PANnumber", "companyRegistrationNumber", "location", "address", "industry", "valid")
 VALUES
-('1', 'GST Council Secretariat', '2', ' 07AAGFF2194N1Z1', '3WKEYSJ0R4', '1', 'Goa', '1 M.G. Road, Panaji, Goa', '', 'TRUE')
+('1', 'GST Council Secretariat', '2', ' 07AAGFF2194N1Z1', '3WKEYSJ0R4', '1', 'Goa', '1 M.G. Road, Panaji, Goa', '', TRUE);
+('2', 'V.V Giri National Labour Institute Noida', '2', ' 07AAGFF2194N1Z1', '3WKEYSJ0R4', '2', 'Delhi', 'RH Marg, New Delhi', 'Education', TRUE);
+
