@@ -8,6 +8,7 @@ import {
     IsOptional,
     IsString,
 } from "class-validator";
+import { StateEnum } from "src/modules/job/entities/job.entity";
 import { ApplicantAddress, ApplicantGender, CategoryEnum } from "./../entities/user-profile.entity";
 export class CreateUserProfileDto {
     @IsString()
@@ -40,4 +41,8 @@ export class CreateUserProfileDto {
     @IsNumber()
     @IsNotEmpty()
     userId: number;
+
+    @IsEnum(StateEnum)
+    @IsOptional()
+    state: StateEnum;
 }
