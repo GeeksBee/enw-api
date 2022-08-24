@@ -6,10 +6,10 @@ import { UpdateJobDto } from "./dto/update-job.dto";
 import { ApiTags } from "@nestjs/swagger";
 
 @Controller("job")
+@ApiTags(apiTags.Job)
 export class JobController {
     constructor(private readonly jobService: JobService) {}
 
-    @ApiTags(apiTags.Job)
     @Post()
     create(@Body() createJobDto: CreateJobDto) {
         return this.jobService.create(createJobDto);

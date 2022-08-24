@@ -5,14 +5,16 @@ import {
     Column,
     CreateDateColumn,
     DeleteDateColumn,
+    Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 
+@Entity()
 export class Job extends BaseEntity {
     @PrimaryGeneratedColumn()
-    jobId: number;
+    id: number;
 
     @Column()
     title: string;
