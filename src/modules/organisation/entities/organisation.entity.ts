@@ -1,5 +1,6 @@
 import User from "src/modules/user/entities/user.entity";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -13,7 +14,7 @@ import { OrganisationMedia } from "./organisationMedia.entity";
 import OrganisationTypeEnum from "./organisationType.enum";
 
 @Entity()
-export class Organisation {
+export class Organisation extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

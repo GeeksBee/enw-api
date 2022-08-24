@@ -1,5 +1,6 @@
 import User from "src/modules/user/entities/user.entity";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -34,7 +35,7 @@ export type ApplicantAddress = {
     district: string;
 };
 @Entity()
-export class UserProfile {
+export class UserProfile extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: "user_profile_id",
     })
