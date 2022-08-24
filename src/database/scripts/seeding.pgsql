@@ -12,4 +12,9 @@ VALUES
 ('7', '18/08/2022', 'Stenographer Gr.I', 'Stenographer Gr.I at Office of the Development Commissioner for Handlooms, Ministry of Textiles', '4', '20', '40', '{"start": 2000 , "end": 8000}', '8', 'Punjab', '28/09/2022' ),
 ('8', '18/08/2022', 'Junior Weaver', 'Junior Weaver at Office of the Development Commissioner for Handlooms, Ministry of Textiles', '4', '20', '40', '{"start": 2000 , "end": 8000}', '8', 'Punjab', '28/09/2022' ),
 ('9', '18/08/2022', 'Ordinary Grade Driver', 'Ordinary Grade Driver at Geological Survey of India Kolkata', '5', '20', '40', '{"start": 2000 , "end": 8000}', '8', 'West Bengal', '27/09/2022' ),
-('10', '18/08/2022', 'Community Based Rehabilitation Worker', 'Community Based Rehabilitation Worker at Post Graduate Institute of Medical & Research, Dr. Ram Manohar Lohia Hospital, New Delhi', '6', '20', '40', '{"start": 2000 , "end": 8000}', '8', 'Delhi', '27/09/2022' ),
+('10', '18/08/2022', 'Community Based Rehabilitation Worker', 'Community Based Rehabilitation Worker at Post Graduate Institute of Medical & Research, Dr. Ram Manohar Lohia Hospital, New Delhi', '6', '20', '40', '{"start": 2000 , "end": 8000}', '8', 'Delhi', '27/09/2022' );
+
+
+INSERT INTO "organisation"
+("id", "description", "organisation_type", "gstNumber", "PANnumber", "companyRegistrationNumber", "location", "address", "industry", "valid", "user", "media")
+VALUES
