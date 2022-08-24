@@ -100,7 +100,7 @@ export class UserProfile extends BaseEntity {
     updatedAt: Date;
 
     @AfterLoad()
-    serializeUser() {
+    serialize() {
         userPrivateFields.forEach((field) => (this.user[field] = undefined));
     }
 }

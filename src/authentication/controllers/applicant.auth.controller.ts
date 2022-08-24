@@ -12,6 +12,7 @@ import ApplicantAuthenticationService from "../services/applicant.auth.service";
 import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
 import { userPrivateFields } from "src/modules/user/entities/user.entity";
+import { UserProfileService } from "src/modules/user-profile/user-profile.service";
 
 @Controller("authentication/applicant")
 export default class ApplicantAuthenticationController {
@@ -21,6 +22,7 @@ export default class ApplicantAuthenticationController {
         private readonly userService: UserService,
         private readonly otpService: OtpService,
         private readonly smsService: SmsService,
+        private readonly userProfileService: UserProfileService,
     ) {}
 
     private logger = new Logger(ApplicantAuthenticationController.name);
@@ -67,7 +69,10 @@ export default class ApplicantAuthenticationController {
         const isValidOtp = this.otpService.verifyOTP(verifyOtpData);
         if (isValidOtp) {
             let user = await this.userService.getByPhone(verifyOtpData.phone);
-            if (!user.isPhoneConfirmed) user = await this.userService.verifyPhone(user.id);
+            if (!user.isPhoneConfirmed) {
+                user = await this.userService.verifyPhone(user.id);
+                await this.userProfileService.createUserProfile(verifyOtpData.phone);
+            }
             const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
             const refreshToken = await this.authService.getRefreshToken(user.id);
             response.setHeader("Set-Cookie", accessTokenCookie.cookie);

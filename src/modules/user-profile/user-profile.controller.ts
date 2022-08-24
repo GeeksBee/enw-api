@@ -1,22 +1,19 @@
 import { UserProfile } from "src/modules/user-profile/entities/user-profile.entity";
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Get, Body, Patch, Param, Delete } from "@nestjs/common";
 import { UserProfileService } from "./user-profile.service";
-import { CreateUserProfileDto } from "./dto/create-user-profile.dto";
 import { UpdateUserProfileDto } from "./dto/update-user-profile.dto";
+import { ApiTags } from "@nestjs/swagger";
+import { apiTags } from "src/common/constants/swagger.constants";
 
 @Controller("user-profile")
 export class UserProfileController {
     constructor(private readonly userProfileService: UserProfileService) {}
 
-    @Post()
-    create(@Body() createUserProfileDto: CreateUserProfileDto): Promise<UserProfile> {
-        return this.userProfileService.create(createUserProfileDto);
-    }
+    // create -> when user phone is verified
+    // update applicant
 
-    @Get()
-    findAll(): Promise<UserProfile[]> {
-        return this.userProfileService.findAll();
-    }
+    //     @ApiTags(apiTags.UserProfile)
+    // updateUserProfile():
 
     @Get(":id")
     findOne(@Param("id") id: string): Promise<UserProfile> {

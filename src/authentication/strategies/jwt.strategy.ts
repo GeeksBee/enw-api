@@ -18,7 +18,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                 (request: Request) => {
                     // return pattern.e;
                     // return request?.headers?.authorization.split(" ")[1];
-                    return request?.cookies?.Authentication;
+                    // console.log(request?.cookies?.accessToken);
+                    // console.log(request.headers);
+                    // console.log(request.cookies);
+                    return request?.cookies?.accessToken
+                        ? request?.cookies?.accessToken
+                        : request.headers.authorization.split(" ")[1];
                 },
             ]),
             secretOrKey: configService.get("JWT_ACCESS_TOKEN_SECRET"),
