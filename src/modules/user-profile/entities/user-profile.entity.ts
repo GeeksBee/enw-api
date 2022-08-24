@@ -1,3 +1,4 @@
+import { StateEnum } from "./../../job/entities/job.entity";
 import User from "src/modules/user/entities/user.entity";
 import {
     BaseEntity,
@@ -82,6 +83,13 @@ export class UserProfile extends BaseEntity {
         default: true,
     })
     isWillingToTravel: boolean;
+
+    @Column({
+        type: "enum",
+        enum: StateEnum,
+        nullable: true,
+    })
+    state: StateEnum;
 
     @Column({
         type: "json",
