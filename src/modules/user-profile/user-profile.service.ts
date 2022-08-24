@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserProfileDto } from './dto/create-user-profile.dto';
-import { UpdateUserProfileDto } from './dto/update-user-profile.dto';
+import { UserProfile } from "./entities/user-profile.entity";
+import { Injectable } from "@nestjs/common";
+import { CreateUserProfileDto } from "./dto/create-user-profile.dto";
+import { UpdateUserProfileDto } from "./dto/update-user-profile.dto";
 
 @Injectable()
 export class UserProfileService {
-  create(createUserProfileDto: CreateUserProfileDto) {
-    return 'This action adds a new userProfile';
-  }
+    async create(createUserProfileDto: CreateUserProfileDto) {
+        const profile = UserProfile.create({
+            ...createUserProfileDto,
+            user: { id: createUserProfileDto.userId },
+        });
+        await profile.save();
+        return profile;
+    }
 
-  findAll() {
-    return `This action returns all userProfile`;
-  }
+    async findAll() {
+        const profiles = await UserProfile.find();
+        return profiles;
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userProfile`;
-  }
+    async findOne(id: number) {
+        const profile = await UserProfile.findOneOrFail(id);
+        return profile;
+    }
 
-  update(id: number, updateUserProfileDto: UpdateUserProfileDto) {
-    return `This action updates a #${id} userProfile`;
-  }
+    async update(id: number, updateUserProfileDto: UpdateUserProfileDto) {
+        let profile: any = await UserProfile.findOneOrFail(id);
+        profile = {
+            ...profile,
+            ...updateUserProfileDto,
+        };
+        profile = await UserProfile.save(profile);
+        return profile;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} userProfile`;
-  }
+    async remove(id: number) {
+        const profile = await UserProfile.findOneOrFail(id);
+        await profile.softRemove();
+        return profile;
+    }
 }

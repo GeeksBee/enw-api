@@ -1,5 +1,6 @@
 import Session from "../../../authentication/entities/session.entity";
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -28,7 +29,7 @@ export type userPrivateKeys = "password" | "isEmailConfirmed" | "isPhoneConfirme
 @Entity({
     name: "enw_user",
 })
-export class User {
+export class User extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: "user_id",
     })
