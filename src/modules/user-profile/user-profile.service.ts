@@ -1,27 +1,53 @@
 import { UserProfile } from "./entities/user-profile.entity";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateUserProfileDto } from "./dto/create-user-profile.dto";
 import { UpdateUserProfileDto } from "./dto/update-user-profile.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import UserService from "../user/services/user.service";
 
 @Injectable()
 export class UserProfileService {
-    async create(createUserProfileDto: CreateUserProfileDto) {
-        const profile = UserProfile.create({
-            ...createUserProfileDto,
-            user: { id: createUserProfileDto.userId },
-        });
-        await profile.save();
-        return profile;
+    constructor(
+        @InjectRepository(UserProfile)
+        private readonly userProfileRepository: Repository<UserProfile>,
+        private readonly userService: UserService,
+    ) {}
+
+    async createUserProfile(phone: string) {
+        const user = await this.userService.getByPhone(phone);
+        if (user) {
+            const userProfile = this.userProfileRepository.create({ user });
+            return this.userProfileRepository.save(userProfile);
+        }
+        throw new NotFoundException(`user with the phone ${phone} does not exist`);
     }
 
-    async findAll() {
-        const profiles = await UserProfile.find();
-        return profiles;
+    public async updateUserProfile(userId: number, data: UpdateUserProfileDto) {
+        const userProfile = await this.getUserProfileByUserId(userId);
+        await this.userProfileRepository.update(userProfile.id, data);
+        const updatedProfile = await this.userProfileRepository.findOne({
+            where: { user: userId },
+            relations: ["user"],
+        });
+        if (updatedProfile) return updatedProfile;
+        throw new NotFoundException(`user-profile with the given id ${userProfile.id} not found`);
+    }
+
+    public async getUserProfileByUserId(userId: number) {
+        return this.userProfileRepository.findOne({
+            where: {
+                user: userId,
+            },
+        });
+    }
+
+    async getAllUserProfiles() {
+        return this.userProfileRepository.find();
     }
 
     async findOne(id: number) {
-        const profile = await UserProfile.findOneOrFail(id);
-        return profile;
+        return UserProfile.findOneOrFail(id);
     }
 
     async update(id: number, updateUserProfileDto: UpdateUserProfileDto) {

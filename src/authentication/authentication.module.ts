@@ -21,6 +21,7 @@ import { PhoneModule } from "src/phone/phone.module";
 import ApplicantAuthenticationController from "./controllers/applicant.auth.controller";
 import { OrganisationModule } from "src/modules/organisation/organisation.module";
 import ApplicantAuthenticationService from "./services/applicant.auth.service";
+import { UserProfileModule } from "src/modules/user-profile/user-profile.module";
 
 @Module({
     imports: [
@@ -31,6 +32,7 @@ import ApplicantAuthenticationService from "./services/applicant.auth.service";
         EmailModule,
         PhoneModule,
         OrganisationModule,
+        UserProfileModule,
     ],
     controllers: [
         AdminAuthenticationController,

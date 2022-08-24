@@ -1,6 +1,7 @@
 import { Address } from "./../../../common/interfaces/Address";
 import { Organisation } from "src/modules/organisation/entities/organisation.entity";
 import {
+    AfterLoad,
     BaseEntity,
     Column,
     CreateDateColumn,

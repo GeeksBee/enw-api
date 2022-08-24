@@ -1,6 +1,7 @@
+import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
 import { StateEnum } from "./../../job/entities/job.entity";
-import User from "src/modules/user/entities/user.entity";
 import {
+    AfterLoad,
     BaseEntity,
     Column,
     CreateDateColumn,
@@ -96,7 +97,7 @@ export class UserProfile extends BaseEntity {
     })
     address: ApplicantAddress;
 
-    @OneToOne(() => User, (user) => user.userProfile) // specify inverse side as a second parameter
+    @OneToOne(() => User, (user) => user.userProfile, { eager: true }) // specify inverse side as a second parameter
     @JoinColumn({ name: "user_id" })
     user: User;
 
@@ -105,4 +106,9 @@ export class UserProfile extends BaseEntity {
 
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
+
+    @AfterLoad()
+    serialize() {
+        userPrivateFields.forEach((field) => (this.user[field] = undefined));
+    }
 }
