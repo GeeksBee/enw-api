@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { StateEnum } from "../entities/job.entity";
 
 export class CreateJobDto {
     @IsString()
@@ -34,4 +35,8 @@ export class CreateJobDto {
     @IsString()
     @IsNotEmpty()
     pincode: string;
+
+    @IsEnum(StateEnum)
+    @IsOptional()
+    state: StateEnum;
 }
