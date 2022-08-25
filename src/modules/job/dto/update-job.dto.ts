@@ -6,4 +6,8 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
     @IsBoolean()
     @IsOptional()
     published: boolean;
+
+    @IsBoolean()
+    @IsOptional()
+    visible: boolean;
 }

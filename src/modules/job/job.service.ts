@@ -18,6 +18,13 @@ export class JobService {
         return jobs;
     }
 
+    async incrementView() {
+        return Job.createQueryBuilder()
+            .update(Job)
+            .set({ viewCount: () => "viewCount + 1" })
+            .execute();
+    }
+
     async findOne(id: number) {
         const job = await Job.findOneOrFail({
             where: { id },
