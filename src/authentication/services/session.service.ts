@@ -29,7 +29,7 @@ export default class SessionService {
     }
     public async invalidateRefreshToken(sessionId: number): Promise<Session> {
         const session = await this.sessionRepository.findOne(sessionId);
-        session.valid = false;
+        if (session) session.valid = false;
         return this.sessionRepository.save(session);
     }
 }

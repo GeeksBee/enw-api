@@ -1,4 +1,4 @@
-import { Controller, Post } from "@nestjs/common";
+import { Controller, Get, Post } from "@nestjs/common";
 import UserService from "../services/user.service";
 
 @Controller("user/admin")
@@ -13,4 +13,7 @@ export class AdminController {
 
     // @Post("user/unbar/:userId")
     // public unbarUser() {}
+
+    @Get("")
+    getData();
 }
