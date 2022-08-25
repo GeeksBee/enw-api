@@ -14,6 +14,21 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
 
     @IsArray()
     @IsOptional()
-    @ApiProperty({ example: [1, 2, 3] })
+    @ApiProperty({
+        example: [
+            {
+                id: 1,
+                name: "Typing",
+            },
+            {
+                id: 2,
+                name: "Stenographer",
+            },
+            {
+                id: 3,
+                name: "Accounting",
+            },
+        ],
+    })
     skills: Skill[];
 }
