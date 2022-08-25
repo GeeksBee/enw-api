@@ -29,6 +29,18 @@ export class OrganisationController {
         return this.organisationService.getOrganisationByUserId(user.id);
     }
 
+    @Get("all")
+    @ApiTags(apiTags.Organisation)
+    public getAllOrganisation() {
+        return this.organisationService.findAll();
+    }
+
+    @Get(":id")
+    @ApiTags(apiTags.Organisation)
+    public getOrganisationById(@Param("id") id: number) {
+        return this.organisationService.findById(id);
+    }
+
     @ApiTags(apiTags.Organisation)
     @ApiBody({ type: UpdateOrganisationDto })
     @UseGuards(RoleGuard([UserRole.EMPLOYER]))
