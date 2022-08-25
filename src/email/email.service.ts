@@ -1,3 +1,5 @@
+import { Job } from "./../modules/job/entities/job.entity";
+import { User } from "src/modules/user/entities/user.entity";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
@@ -5,6 +7,9 @@ import { createTransport, SendMailOptions, getTestMessageUrl } from "nodemailer"
 import Mail from "nodemailer/lib/mailer";
 import { ConfigProps } from "src/config/configValidationSchema";
 import { VerificationTokenPayload } from "./interfaces/VerificationTokenPayload.interface";
+import Handlebars from "handlebars";
+import * as fs from "fs";
+import * as path from "path";
 
 @Injectable()
 export class EmailService {
@@ -23,6 +28,19 @@ export class EmailService {
                 pass: configService.get<string>("EMAIL_PASSWORD"),
             },
         });
+        // this.nodeMailerTransporter.use(
+        //     "compile",
+        //     hbs({
+        //         viewEngine: {
+        //             extname: ".hbs", // handlebars extension
+        //             layoutsDir: "src/email/templates", // location of handlebars templates
+        //             defaultLayout: "JobFound", // name of main template
+        //             partialsDir: "src/email/templates", // location of your subtemplates aka. header, footer etc
+        //         },
+        //         viewPath: "src/email/templates",
+        //         extName: ".hbs",
+        //     }),
+        // );
     }
 
     public sendMail(payload: SendMailOptions) {
@@ -57,5 +75,22 @@ export class EmailService {
             text,
         });
         return token;
+    }
+
+    async sendJobMail(user: User, job: Job) {
+        const html = `<h1>Title: ${job.title}</h1>`;
+        const templateStr = fs
+            .readFileSync(path.resolve(__dirname, "templates/JobFound.hbs"))
+            .toString("utf8");
+        console.log(templateStr);
+
+        const template = Handlebars.compile(templateStr, { noEscape: true });
+        const payload = {
+            to: user.email,
+            from: this.configService.get<string>("EMAIL_USER"),
+            subject: "New Job Posted - Apply Now",
+            html: template({ name: `rahul` }),
+        };
+        return this.sendMail(payload);
     }
 }

@@ -46,6 +46,7 @@
         "cookie-parser": "^1.4.6",
         "dotenv": "^8.6.0",
         "express-basic-auth": "^1.2.1",
+        "handlebars": "^4.7.7",
         "lodash": "^4.17.21",
         "nanoid": "^3.0.0",
         "nestjs-razorpay": "^1.0.3",
