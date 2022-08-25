@@ -12,17 +12,21 @@ import {
     UseGuards,
     UseInterceptors,
     UploadedFile,
+    Res,
 } from "@nestjs/common";
 import { JobService } from "./job.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { ApiTags } from "@nestjs/swagger";
-import { Request } from "express";
+import { Request, Response } from "express";
 import RoleGuard from "src/authentication/guards/role.guard";
 import { UserRole } from "../user/entities/user.entity";
 import RequestWithUser from "src/authentication/interfaces/requestWithUser.interface";
 import { JobFilterDto } from "./dto/filter-dto";
 import { multerConfig } from "src/config/module.config";
+import { JobGroupDto } from "./dto/job-group-dto";
+import { createReadStream } from "fs";
+import { join } from "path";
 
 @Controller("job")
 @ApiTags(apiTags.Job)
@@ -34,6 +38,35 @@ export class JobController {
     create(@Body() createJobDto: CreateJobDto, @Req() request: Request) {
         // console.log("employer user ", request.user);
         return this.jobService.create(createJobDto);
+    }
+
+    @Get("filter")
+    async filterJobs(@Body() body: JobFilterDto) {
+        return this.jobService.filterJobs(body);
+    }
+
+    @Post("upload")
+    @UseInterceptors(FileInterceptor("file", multerConfig))
+    uploadFile(@UploadedFile() file: Express.Multer.File) {
+        console.log(file);
+
+        return file;
+    }
+
+    @Get("download/:name")
+    getFile(@Res() res: Response, @Param("name") name: string) {
+        const file = createReadStream(join(process.cwd(), `/uploads/${name}`));
+        return file.pipe(res);
+    }
+
+    @Post("group")
+    async createJobGroup(@Body() body: JobGroupDto) {
+        return this.jobService.createJobGroup(body);
+    }
+
+    @Get("search/:search")
+    async search(@Param("search") search: string) {
+        return this.jobService.search(search);
     }
 
     @Get()
@@ -60,18 +93,5 @@ export class JobController {
     @Delete(":id")
     remove(@Param("id") id: string) {
         return this.jobService.remove(+id);
-    }
-
-    @Get("/filter")
-    async filterJobs(@Body() body: JobFilterDto) {
-        return this.jobService.filterJobs(body);
-    }
-
-    @Post("upload")
-    @UseInterceptors(FileInterceptor("file", multerConfig))
-    uploadFile(@UploadedFile() file: Express.Multer.File) {
-        console.log(file);
-
-        return file;
     }
 }

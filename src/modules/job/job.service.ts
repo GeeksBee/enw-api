@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EmailService } from "src/email/email.service";
-import { Between, Repository } from "typeorm";
+import { Between, Like, Repository } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { JobFilterDto } from "./dto/filter-dto";
@@ -130,6 +130,15 @@ export class JobService {
     async filterJobs(filterDto: JobFilterDto): Promise<Job[]> {
         const jobs = this.jobRepo.find({
             where: {},
+        });
+        return jobs;
+    }
+
+    async search(searchTerm: string): Promise<Job[]> {
+        const jobs = await this.jobRepo.find({
+            where: {
+                title: Like(`%${searchTerm}%`),
+            },
         });
         return jobs;
     }
