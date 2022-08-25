@@ -14,6 +14,6 @@ export class AdminController {
     // @Post("user/unbar/:userId")
     // public unbarUser() {}
 
-    @Get("")
-    getData();
+    // @Get("")
+    // getData();
 }
