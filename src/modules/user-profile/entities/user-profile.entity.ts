@@ -1,5 +1,5 @@
 import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
-import { StateEnum } from "./../../job/entities/job.entity";
+import { SkillsEnum, StateEnum } from "./../../job/entities/job.entity";
 import {
     AfterLoad,
     BaseEntity,
@@ -107,6 +107,11 @@ export class UserProfile extends BaseEntity {
 
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
+
+    @Column({
+        type: "simple-array",
+    })
+    skills: SkillsEnum[];
 
     @AfterLoad()
     serialize() {
