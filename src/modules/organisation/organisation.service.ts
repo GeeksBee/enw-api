@@ -22,7 +22,9 @@ export class OrganisationService {
     }
 
     public findById(id: number) {
-        return this.organisationRepository.findOne(id);
+        return this.organisationRepository.findOne(id, {
+            relations: ["jobs"],
+        });
     }
 
     public async createOrganisation(email: string) {
@@ -47,7 +49,9 @@ export class OrganisationService {
     }
 
     public getOrganisationById(id: number) {
-        return this.organisationRepository.findOne(id);
+        return this.organisationRepository.findOne(id, {
+            relations: ["jobs"],
+        });
     }
 
     public getOrganisationByUserId(userId: number) {
@@ -55,6 +59,7 @@ export class OrganisationService {
             where: {
                 user: { id: userId },
             },
+            relations: ["jobs"],
         });
     }
 
