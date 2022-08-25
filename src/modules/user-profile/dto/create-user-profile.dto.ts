@@ -4,6 +4,7 @@ import {
     IsEmpty,
     IsEnum,
     IsHalfWidth,
+    isJSON,
     IsJSON,
     IsNotEmpty,
     IsNumber,
@@ -51,7 +52,6 @@ export class CreateUserProfileDto {
     isWillingToTravel: boolean;
 
     @IsOptional()
-    @IsJSON()
     @ApiProperty({
         example: {
             address1: "123 Main Street",
@@ -64,13 +64,6 @@ export class CreateUserProfileDto {
         },
     })
     address: ApplicantAddress;
-
-    @IsNumber()
-    @IsNotEmpty()
-    @ApiProperty({
-        example: 4,
-    })
-    userId: number;
 
     @IsEnum(StateEnum)
     @IsOptional()
