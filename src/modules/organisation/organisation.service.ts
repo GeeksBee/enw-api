@@ -17,6 +17,10 @@ export class OrganisationService {
         private readonly userService: UserService,
     ) {}
 
+    public findAll() {
+        return this.organisationRepository.find();
+    }
+
     public async createOrganisation(email: string) {
         const user = await this.userService.getByEmail(email);
         if (user) {
