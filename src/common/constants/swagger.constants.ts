@@ -5,4 +5,5 @@ export const apiTags = {
     Job: "Job",
     UserProfile: "UserProfile",
     SuperAdmin: "SuperAdmin",
+    Admin: "Admin",
 };

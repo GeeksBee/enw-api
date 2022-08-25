@@ -20,6 +20,13 @@ export class JobService {
         @InjectRepository(JobGroup) private readonly jobGroupRepo: Repository<JobGroup>,
     ) {}
 
+    public countJob() {
+        return this.jobRepo.count();
+    }
+    public countJobGroup() {
+        return this.jobGroupRepo.count();
+    }
+
     async create(createJobDto: CreateJobDto) {
         const job = this.jobRepo.create(createJobDto);
         await this.jobRepo.save(job);

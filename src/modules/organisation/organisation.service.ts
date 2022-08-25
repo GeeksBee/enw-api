@@ -21,6 +21,10 @@ export class OrganisationService {
         return this.organisationRepository.find();
     }
 
+    public count() {
+        return this.organisationRepository.count();
+    }
+
     public findById(id: number) {
         return this.organisationRepository.findOne(id, {
             relations: ["jobs"],
