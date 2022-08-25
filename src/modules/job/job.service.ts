@@ -62,16 +62,16 @@ export class JobService {
     }
 
     async update(id: number, updateJobDto: UpdateJobDto) {
-        if (updateJobDto.skills) {
-            const skills = await this.skillRepo
-                .createQueryBuilder("skill")
-                .select("id")
-                .from("skill")
-                .where("id IN (:...ids)", { ids: updateJobDto.skills })
-                .getMany();
-            updateJobDto.skills = [];
-            updateJobDto.skills.push(...skills);
-        }
+        // if (updateJobDto.skills) {
+        // const skills = await this.skillRepo
+        //     .createQueryBuilder("skill")
+        //     .select("id")
+        //     .from("skill")
+        //     .where("id IN (:...ids)", { ids: updateJobDto.skills })
+        //     .getMany();
+        // updateJobDto.skills = [];
+        // // updateJobDto.skills.push(...skills);
+        // }
         return this.jobRepo.update(id, updateJobDto);
     }
 
