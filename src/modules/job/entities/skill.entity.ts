@@ -12,6 +12,6 @@ export class Skill {
     })
     name: string;
 
-    @ManyToMany(() => Job, (job) => job.jobGroup)
+    @ManyToMany(() => Job, (job) => job.skills)
     jobs: Job[];
 }
