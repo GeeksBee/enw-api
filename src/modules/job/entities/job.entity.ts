@@ -12,6 +12,18 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 
+export enum SkillsEnum {
+    "Master of Art (M.A)" = "Master of Art (M.A)",
+    "Master of Science (M.Sc/M.S)" = "Master of Science (M.Sc/M.S)",
+    "Bachelor of Veterinary Science" = "Bachelor of Veterinary Science",
+    "Bachelor of Medicine" = "Bachelor of Medicine",
+    "Bachelor of Surgery" = "Bachelor of Surgery",
+    "Bachelor of Technology/Engineering (B.Tech/B.E)" = "Bachelor of Technology/Engineering (B.Tech/B.E)",
+    "Master of Philosophy" = "Master of Philosophy",
+    "Master of Veterinary Science" = "Master of Veterinary Science",
+    "Mater of Technology/Engineering (M.Tech/M.E)" = "Mater of Technology/Engineering (M.Tech/M.E)",
+}
+
 export enum StateEnum {
     "Andhra Pradesh" = "Andhra Pradesh",
     "Arunachal Pradesh" = "Arunachal Pradesh",
@@ -133,4 +145,9 @@ export class Job extends BaseEntity {
 
     @DeleteDateColumn()
     deletedAt: Date;
+
+    @Column({
+        type: "simple-array",
+    })
+    skills: SkillsEnum[];
 }
