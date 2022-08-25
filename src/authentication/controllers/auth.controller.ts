@@ -4,7 +4,7 @@ import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
 import { userPrivateFields } from "src/modules/user/entities/user.entity";
 import JwtAuthenticationGuard from "../guards/jwtAuthentication.guard";
-import { ApiBody, ApiHeader, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiHeader, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 import { apiTags } from "src/common/constants/swagger.constants";
 import JwtRefreshTokenAuthenticationGuard from "../guards/jwtRefreshTokenAuthentication.guard";
@@ -49,6 +49,7 @@ export default class AuthenticationController {
 
     @ApiTags(apiTags.Authentication)
     @UseGuards(JwtAuthenticationGuard)
+    @ApiBearerAuth("Authorization")
     @Get("me")
     public authenticate(@Req() request: RequestWithUser) {
         const user = request.user;

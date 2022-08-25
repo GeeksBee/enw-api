@@ -22,7 +22,18 @@ async function bootstrap() {
         .setTitle("Employee News Weekly API v1")
         .setDescription("API for Employee News Weekly portal")
         .setVersion("1.0.0")
-        .addCookieAuth("authentication")
+        // .addCookieAuth("authentication")
+        // .addSecurity('')
+        .addBearerAuth(
+            {
+                description: "Default JWT Authorization",
+                type: "http",
+                in: "header",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+            },
+            "Authorization",
+        )
         .build();
     const document = SwaggerModule.createDocument(app, swaggerConfig);
     SwaggerModule.setup("docs", app, document);

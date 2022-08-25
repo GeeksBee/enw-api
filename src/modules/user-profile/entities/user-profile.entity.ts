@@ -45,13 +45,13 @@ export class UserProfile extends BaseEntity {
 
     @Column({
         type: "varchar",
-        nullable: false,
+        nullable: true,
     })
     description: string;
 
     @Column({
         type: "int",
-        nullable: false,
+        nullable: true,
     })
     age: number;
 
@@ -94,6 +94,7 @@ export class UserProfile extends BaseEntity {
 
     @Column({
         type: "json",
+        nullable: true,
     })
     address: ApplicantAddress;
 

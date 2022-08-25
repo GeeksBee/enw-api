@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, Req, UseGuards } from "@nestjs/common";
-import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import JwtAuthenticationGuard from "src/authentication/guards/jwtAuthentication.guard";
 import RoleGuard from "src/authentication/guards/role.guard";
 import RequestWithUser from "src/authentication/interfaces/requestWithUser.interface";
@@ -9,6 +9,7 @@ import { UpdateOrganisationDto } from "./dtos/update-org.dto";
 import { OrganisationService } from "./organisation.service";
 
 @Controller("organisation")
+@ApiBearerAuth("Authorization")
 export class OrganisationController {
     constructor(private readonly organisationService: OrganisationService) {}
 

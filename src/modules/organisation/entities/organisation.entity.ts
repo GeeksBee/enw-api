@@ -23,6 +23,12 @@ export class Organisation extends BaseEntity {
         type: "varchar",
         nullable: true,
     })
+    name: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
     description: string;
 
     @Column({
