@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import EmailAlreadyVerified from "src/common/exceptions/emailAlreadyVerified.exception";
 import { DeleteResult, Repository } from "typeorm";
-import User from "../entities/user.entity";
+import User, { UserRole } from "../entities/user.entity";
 
 @Injectable()
 export default class UserService {
@@ -42,6 +42,26 @@ export default class UserService {
             { email },
             {
                 isEmailConfirmed: true,
+            },
+        );
+    }
+
+    async barUser(userId: number) {
+        const user = await this.userRepository.findOne(userId);
+        return this.userRepository.update(
+            { id: userId },
+            {
+                previousRole: user.role,
+                role: UserRole.GHOST,
+            },
+        );
+    }
+    async unbarUser(userId: number) {
+        const user = await this.userRepository.findOne(userId);
+        return this.userRepository.update(
+            { id: userId },
+            {
+                role: user.previousRole,
             },
         );
     }

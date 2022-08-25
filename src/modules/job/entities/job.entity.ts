@@ -68,6 +68,23 @@ export class Job extends BaseEntity {
     @ManyToOne(() => Organisation)
     organisation: Organisation;
 
+    @Column({ nullable: true })
+    viewCount: number;
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    published: boolean; // admin access
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    visible: boolean; // employer access
+
     @Column()
     minAge: number;
 
@@ -101,6 +118,12 @@ export class Job extends BaseEntity {
         nullable: true,
     })
     state: StateEnum;
+
+    @Column({
+        type: "date",
+        nullable: true,
+    })
+    lastDateOfApplication: Date;
 
     @CreateDateColumn()
     createdAt: Date;
