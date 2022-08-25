@@ -71,7 +71,8 @@ export default class ApplicantAuthenticationController {
             let user = await this.userService.getByPhone(verifyOtpData.phone);
             if (!user.isPhoneConfirmed) {
                 user = await this.userService.verifyPhone(user.id);
-                await this.userProfileService.createUserProfile(verifyOtpData.phone);
+                const prof = await this.userProfileService.createUserProfile(verifyOtpData.phone);
+                console.log(prof);
             }
             const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
             const refreshToken = await this.authService.getRefreshToken(user.id);

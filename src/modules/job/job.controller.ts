@@ -1,9 +1,13 @@
 import { apiTags } from "src/common/constants/swagger.constants";
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from "@nestjs/common";
 import { JobService } from "./job.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { ApiTags } from "@nestjs/swagger";
+import { Request } from "express";
+import RoleGuard from "src/authentication/guards/role.guard";
+import { UserRole } from "../user/entities/user.entity";
+import RequestWithUser from "src/authentication/interfaces/requestWithUser.interface";
 
 @Controller("job")
 @ApiTags(apiTags.Job)
@@ -11,7 +15,9 @@ export class JobController {
     constructor(private readonly jobService: JobService) {}
 
     @Post()
-    create(@Body() createJobDto: CreateJobDto) {
+    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
+    create(@Body() createJobDto: CreateJobDto, @Req() request: RequestWithUser) {
+        console.log("employer user ", request.user);
         return this.jobService.create(createJobDto);
     }
 
@@ -21,7 +27,8 @@ export class JobController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string) {
+    findOne(@Param("id") id: string, @Req() request: Request) {
+        console.log(request);
         return this.jobService.findOne(+id);
     }
 

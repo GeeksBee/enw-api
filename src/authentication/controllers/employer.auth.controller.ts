@@ -62,13 +62,13 @@ export default class EmployerAuthenticationController {
         const user = request.user;
         const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
         const refreshToken = await this.authService.getRefreshToken(user.id);
-        // request.res.setHeader("Set-Cookie", accessTokenCookie.cookie);
-        request.res.cookie("accessToken", accessTokenCookie.token, {
-            maxAge: 1000 * 60 * 15,
-            httpOnly: true,
-
-            domain: "http://localhost:8080",
-        });
+        request.res.setHeader("Set-Cookie", accessTokenCookie.cookie);
+        // request.res.cookie("Authentication", accessTokenCookie.token, {
+        //     maxAge: 1000 * 60 * 15,
+        //     httpOnly: true,
+        //     path: "",
+        //     domain: "http://localhost:8080",
+        // });
         return {
             user: omit(user, userPrivateFields),
             refreshToken,

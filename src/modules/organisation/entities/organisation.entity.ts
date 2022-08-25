@@ -1,5 +1,6 @@
-import User from "src/modules/user/entities/user.entity";
+import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
 import {
+    AfterLoad,
     BaseEntity,
     Column,
     CreateDateColumn,
@@ -17,6 +18,12 @@ import OrganisationTypeEnum from "./organisationType.enum";
 export class Organisation extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
+    name: string;
 
     @Column({
         type: "varchar",

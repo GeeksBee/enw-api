@@ -1,19 +1,27 @@
-delete from "enw_organisation_media";
-delete from "enw_organisation";
-delete from "enw_payment";
+-- delete from "enw_organisation_media";
+-- delete from "enw_organisation";
+-- delete from "enw_payment";
+DELETE FROM "organisation";
 delete from "enw_session";
 delete from "enw_user";
 
 
 INSERT INTO "enw_user" 
-("name", "email", "password","role","is_email_confirmed", "is_phone_confirmed")
+("user_id","name", "email", "password","role","is_email_confirmed", "is_phone_confirmed")
 VALUES 
-('Super Admin', 'superadmin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '0', TRUE, TRUE),
-('Admin', 'admin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '1', TRUE, TRUE),
-('Employer 1', 'employer_1@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '2', TRUE, TRUE);
+(1, 'Super Admin', 'superadmin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '0', TRUE, TRUE),
+(2,  'Admin', 'admin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '1', TRUE, TRUE),
+(3,  'Employer 1', 'employer.one@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '2', TRUE, TRUE),
+(4,  'Applicant 1', 'applicant.one@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '3', TRUE, TRUE);
 
+SELECT * FROM "enw_user";
 
+INSERT INTO "organisation"
+("user_id")
+VALUES
+(3);
 
+SELECT * FROM "organisation";
 
 -- DROP TABLE  "organisation_type_id";
 

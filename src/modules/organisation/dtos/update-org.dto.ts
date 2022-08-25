@@ -6,6 +6,13 @@ export class UpdateOrganisationDto {
     @IsString()
     @IsOptional()
     @ApiProperty({
+        example: "Oil and Natural Gas Corporation",
+    })
+    name?: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiProperty({
         example: "Description for organisation",
     })
     description?: string;
@@ -13,6 +20,7 @@ export class UpdateOrganisationDto {
     @IsEnum(OrganisationTypeEnum)
     @IsOptional()
     @ApiProperty({
+        type: "number",
         enum: OrganisationTypeEnum,
         example: OrganisationTypeEnum.PUBLIC_SECTOR_UNDERTAKING,
     })

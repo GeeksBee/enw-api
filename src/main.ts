@@ -7,21 +7,33 @@ import { ValidationPipe } from "@nestjs/common";
 import { RedocModule } from "nestjs-redoc";
 import { redocConfig } from "./config/redoc.config";
 import * as cookieParser from "cookie-parser";
+import * as basicAuth from "express-basic-auth";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.enableCors({
         credentials: true,
-        // allowedHeaders: ["*"],
-        origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:4000"],
+        origin: true,
     });
     app.use(cookieParser());
+
     const configService = app.get(ConfigService<ConfigProps>);
     const swaggerConfig = new DocumentBuilder()
         .setTitle("Employee News Weekly API v1")
         .setDescription("API for Employee News Weekly portal")
         .setVersion("1.0.0")
-        .addCookieAuth("authentication")
+        // .addCookieAuth("authentication")
+        // .addSecurity('')
+        .addBearerAuth(
+            {
+                description: "Default JWT Authorization",
+                type: "http",
+                in: "header",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+            },
+            "Authorization",
+        )
         .build();
     const document = SwaggerModule.createDocument(app, swaggerConfig);
     SwaggerModule.setup("docs", app, document);

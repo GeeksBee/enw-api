@@ -5,7 +5,7 @@ class LoginAdminDto {
     @IsEmail()
     @ApiProperty({
         description: "admin user email",
-        example: "john.wick@gmail.com",
+        example: "admin.one@enw.in",
     })
     email: string;
 
