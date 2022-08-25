@@ -45,6 +45,7 @@
         "class-validator": "^0.13.2",
         "cookie-parser": "^1.4.6",
         "dotenv": "^8.6.0",
+        "eslint-plugin-import": "^2.26.0",
         "express-basic-auth": "^1.2.1",
         "handlebars": "^4.7.7",
         "lodash": "^4.17.21",

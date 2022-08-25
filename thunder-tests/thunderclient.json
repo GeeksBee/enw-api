@@ -315,5 +315,30 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "c0a9d94e-c3fc-4dab-97bd-b2b46d9fc3c7",
+    "colId": "65cf23ea-8858-40fd-a032-83a8bf032a88",
+    "containerId": "",
+    "name": "file",
+    "url": "{{host}}/user/admin/newsletter/upload",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-08-25T20:34:00.415Z",
+    "modified": "2022-08-25T20:35:34.519Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [],
+      "files": [
+        {
+          "name": "file",
+          "value": "..\\..\\..\\..\\..\\Users\\rajdh\\Desktop\\WhatsApp Image 2022-08-17 at 10.38.20 PM.jpeg"
+        }
+      ]
+    },
+    "tests": []
   }
 ]

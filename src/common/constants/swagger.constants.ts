@@ -6,4 +6,5 @@ export const apiTags = {
     UserProfile: "UserProfile",
     SuperAdmin: "SuperAdmin",
     Admin: "Admin",
+    Newsletter: "Newsletter",
 };
