@@ -1,5 +1,6 @@
-import { PartialType } from "@nestjs/swagger";
-import { IsBoolean, IsOptional } from "class-validator";
+import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { IsArray, IsBoolean, IsOptional } from "class-validator";
+import { Skill } from "../entities/skill.entity";
 import { CreateJobDto } from "./create-job.dto";
 
 export class UpdateJobDto extends PartialType(CreateJobDto) {
@@ -10,4 +11,9 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
     @IsBoolean()
     @IsOptional()
     visible: boolean;
+
+    @IsArray()
+    @IsOptional()
+    @ApiProperty({ example: [1, 2, 3] })
+    skills: Skill[];
 }

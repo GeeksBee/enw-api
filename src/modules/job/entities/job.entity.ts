@@ -8,6 +8,7 @@ import {
     DeleteDateColumn,
     Entity,
     JoinColumn,
+    JoinTable,
     ManyToMany,
     ManyToOne,
     OneToMany,
@@ -69,7 +70,7 @@ export enum StateEnum {
 }
 
 @Entity()
-export class Job extends BaseEntity {
+export class Job {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -79,10 +80,8 @@ export class Job extends BaseEntity {
     @Column()
     description: string;
 
-    @Column()
-    organisationId: number;
-
-    @ManyToOne(() => Organisation)
+    @ManyToOne(() => Organisation, (org) => org.jobs)
+    @JoinColumn({ name: "organisation_id" })
     organisation: Organisation;
 
     @OneToMany(() => JobGroup, (group) => group.jobs)
@@ -157,7 +156,9 @@ export class Job extends BaseEntity {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @ManyToMany(() => Skill, (skill) => skill.jobs)
-    @JoinColumn()
+    @ManyToMany(() => Skill, (skill) => skill.jobs, { eager: true })
+    @JoinTable({
+        name: "skills_on_jobs",
+    })
     skills: Skill[];
 }
