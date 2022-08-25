@@ -125,7 +125,7 @@ export class Job {
     @Column()
     yearsOfExperience: number;
 
-    @Column()
+    @Column({ nullable: true })
     pincode: string;
 
     @Column({
@@ -156,7 +156,7 @@ export class Job {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @ManyToMany(() => Skill, (skill) => skill.jobs, { eager: true })
+    @ManyToMany(() => Skill, (skill) => skill.jobs)
     @JoinTable({
         name: "skills_on_jobs",
     })

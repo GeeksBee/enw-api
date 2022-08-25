@@ -15,9 +15,9 @@ export class JobController {
     constructor(private readonly jobService: JobService) {}
 
     @Post()
-    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
-    create(@Body() createJobDto: CreateJobDto, @Req() request: RequestWithUser) {
-        console.log("employer user ", request.user);
+    // @UseGuards(RoleGuard([UserRole.EMPLOYER]))
+    create(@Body() createJobDto: CreateJobDto, @Req() request: Request) {
+        // console.log("employer user ", request.user);
         return this.jobService.create(createJobDto);
     }
 
