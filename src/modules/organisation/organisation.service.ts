@@ -21,10 +21,14 @@ export class OrganisationService {
         return this.organisationRepository.find();
     }
 
+    public findById(id: number) {
+        return this.organisationRepository.findOne(id);
+    }
+
     public async createOrganisation(email: string) {
         const user = await this.userService.getByEmail(email);
         if (user) {
-            const organisation = this.organisationRepository.create({ user });
+            const organisation = this.organisationRepository.create({ user, name: user.name });
             return this.organisationRepository.save(organisation);
         }
         throw new NotFoundException(`user with the email ${email} does not exist`);

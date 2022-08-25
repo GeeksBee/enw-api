@@ -31,10 +31,14 @@ export class OrganisationController {
 
     @Get("all")
     @ApiTags(apiTags.Organisation)
-    public getAllOrganisation(@Req() request: RequestWithUser) {
-        const user = request.user;
-        console.log({ user });
+    public getAllOrganisation() {
         return this.organisationService.findAll();
+    }
+
+    @Get(":id")
+    @ApiTags(apiTags.Organisation)
+    public getOrganisationById(@Param("id") id: number) {
+        return this.organisationService.findById(id);
     }
 
     @ApiTags(apiTags.Organisation)
