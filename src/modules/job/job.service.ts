@@ -4,6 +4,7 @@ import { EmailService } from "src/email/email.service";
 import { Between, Repository } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
+import { JobFilterDto } from "./dto/filter-dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { Job } from "./entities/job.entity";
 import { Skill } from "./entities/skill.entity";
@@ -126,5 +127,11 @@ export class JobService {
             }
         }
         return success;
+    }
+    async filterJobs(filterDto: JobFilterDto): Promise<Job[]> {
+        const jobs = this.jobRepo.find({
+            where: {},
+        });
+        return jobs;
     }
 }

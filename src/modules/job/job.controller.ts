@@ -1,5 +1,18 @@
+import { FileInterceptor } from "@nestjs/platform-express";
 import { apiTags } from "src/common/constants/swagger.constants";
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from "@nestjs/common";
+import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    Patch,
+    Param,
+    Delete,
+    Req,
+    UseGuards,
+    UseInterceptors,
+    UploadedFile,
+} from "@nestjs/common";
 import { JobService } from "./job.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
@@ -8,6 +21,8 @@ import { Request } from "express";
 import RoleGuard from "src/authentication/guards/role.guard";
 import { UserRole } from "../user/entities/user.entity";
 import RequestWithUser from "src/authentication/interfaces/requestWithUser.interface";
+import { JobFilterDto } from "./dto/filter-dto";
+import { multerConfig } from "src/config/module.config";
 
 @Controller("job")
 @ApiTags(apiTags.Job)
@@ -46,5 +61,18 @@ export class JobController {
     @Delete(":id")
     remove(@Param("id") id: string) {
         return this.jobService.remove(+id);
+    }
+
+    @Get("/filter")
+    async filterJobs(@Body() body: JobFilterDto) {
+        return this.jobService.filterJobs(body);
+    }
+
+    @Post("upload")
+    @UseInterceptors(FileInterceptor("file", multerConfig))
+    uploadFile(@UploadedFile() file: Express.Multer.File) {
+        console.log(file);
+
+        return file;
     }
 }
