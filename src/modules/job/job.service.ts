@@ -4,6 +4,7 @@ import { EmailService } from "src/email/email.service";
 import { Between, Repository } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
+import { UpdateJobDto } from "./dto/update-job.dto";
 import { Job } from "./entities/job.entity";
 import { Skill } from "./entities/skill.entity";
 
@@ -12,10 +13,12 @@ export class JobService {
     constructor(
         private readonly emailService: EmailService,
         @InjectRepository(Skill) private readonly skillRepo: Repository<Skill>,
+        @InjectRepository(Job) private readonly jobRepo: Repository<Job>,
     ) {}
+
     async create(createJobDto: CreateJobDto) {
-        const job = Job.create(createJobDto);
-        await Job.save(job);
+        const job = this.jobRepo.create(createJobDto);
+        await this.jobRepo.save(job);
 
         // Send Email and notifications to right candidate
         this.sendMailsToEligibleUsers(job);
@@ -28,7 +31,7 @@ export class JobService {
     }
 
     async findAll() {
-        const jobs = await Job.find();
+        const jobs = await this.jobRepo.find();
         jobs.forEach((job, index) => {
             if (!jobs[index].address) {
                 jobs[index].address = {
@@ -46,43 +49,40 @@ export class JobService {
     }
 
     async incrementView(jobId: number) {
-        const job = await Job.findOne(jobId);
+        const job = await this.jobRepo.findOne(jobId);
         job.viewcount++;
-        await Job.save(job);
+        await this.jobRepo.save(job);
     }
 
     async findOne(id: number) {
-        const job = await Job.findOneOrFail({
+        const job = await this.jobRepo.findOneOrFail({
             where: { id },
         });
         return job;
     }
 
-    async update(id: number, updateJobDto: any) {
-        let job = await Job.findOneOrFail({
-            where: {
-                id,
-            },
-        });
-
-        job = {
-            ...job,
-            ...updateJobDto,
-        };
-
-        await Job.save(job);
-        return job;
+    async update(id: number, updateJobDto: UpdateJobDto) {
+        if (updateJobDto.skills) {
+            const skills = await this.skillRepo
+                .createQueryBuilder("skill")
+                .select("id")
+                .from("skill")
+                .where("id IN (:...ids)", { ids: updateJobDto.skills })
+                .getMany();
+            updateJobDto.skills = [];
+            updateJobDto.skills.push(...skills);
+        }
+        return this.jobRepo.update(id, updateJobDto);
     }
 
     async remove(id: number) {
-        const job = await Job.findOneOrFail({
+        const job = await this.jobRepo.findOneOrFail({
             where: {
                 id,
             },
         });
 
-        await Job.softRemove(job);
-        return job;
+        return this.jobRepo.softRemove(job);
     }
 
     async sendMailsToEligibleUsers(job: Job) {

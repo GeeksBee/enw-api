@@ -1,3 +1,4 @@
+import { Job } from "src/modules/job/entities/job.entity";
 import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
 import {
     AfterLoad,
@@ -38,6 +39,9 @@ export class Organisation extends BaseEntity {
         default: OrganisationTypeEnum.PUBLIC_SECTOR_UNDERTAKING,
     })
     organisationType: OrganisationTypeEnum;
+
+    @OneToMany(() => Job, (job) => job.organisation)
+    jobs: Job[];
 
     // details
     @Column({
