@@ -19,5 +19,8 @@ INSERT INTO "organisation"
 ("id", "description", "organisation_type", "gstNumber", "PANnumber", "companyRegistrationNumber", "location", "address", "industry", "valid")
 VALUES
 ('1', 'GST Council Secretariat', '2', ' 07AAGFF2194N1Z1', '3WKEYSJ0R4', '1', 'Goa', '1 M.G. Road, Panaji, Goa', '', TRUE);
-('2', 'V.V Giri National Labour Institute Noida', '2', ' 07AAGFF2194N1Z1', '3WKEYSJ0R4', '2', 'Delhi', 'RH Marg, New Delhi', 'Education', TRUE);
-
+('2', 'V.V Giri National Labour Institute Noida', '2', ' 07AAKBH1965N1Z1', '3WKGBYJ0R4', '2', 'Delhi', 'RH Marg, New Delhi', 'Education', TRUE);
+('3', 'Indian Pharmacopoeia Commission', '2', ' 07NHGST3984N1Z1', '3WKLGYO0R4', '3', 'Assam', 'Gera Imperium, Assam', '', TRUE);
+('4', 'Office of the Development Commissioner for Handlooms, Ministry of Textiles', '3', ' 07AAGFF6582M5Z1', '3WKGFI0R4', '4', 'Punjab', 'Ministry of Textiles, Assembly Complex, Punjab', '', TRUE);
+('5', 'Geological Survey of India Kolkata', '2', ' 07MCFHY1594N1Z1', '3WLAN0R4', '5', 'West Bengal', 'Kolkata', 'Science and Research', TRUE);
+('6', 'Post Graduate Institute of Medical & Research, Dr. Ram Manohar Lohia Hospital, New Delhi', '2', ' 07ABHST1678N1Z1', '3WIPHJ0R4', '6', 'New Delhi', 'Post Graduate Institute of Medical & Research, Dr. Ram Manohar Lohia Hospital, New Delhi', 'Healthcare', TRUE);
