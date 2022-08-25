@@ -57,7 +57,7 @@ export default class AuthenticationService {
             expiresIn: `${this.configService.get<number>("JWT_ACCESS_TOKEN_EXPIRATION_TIME")}s`,
         });
         return {
-            cookie: `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+            cookie: `accessToken=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
                 "JWT_ACCESS_TOKEN_EXPIRATION_TIME",
             )}`,
             token,
@@ -65,7 +65,7 @@ export default class AuthenticationService {
     }
 
     public getCookieForLogOut() {
-        return "Authentication=; HttpOnly; Path=/; Max-Age=0";
+        return "accessToken=; HttpOnly; Path=/; Max-Age=0";
     }
 
     public async getRefreshToken(userId: number) {
