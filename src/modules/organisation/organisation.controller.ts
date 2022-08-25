@@ -24,6 +24,7 @@ export class OrganisationController {
     @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     public getOrganisation(@Req() request: RequestWithUser) {
         const user = request.user;
+        console.log({ user });
         return this.organisationService.getOrganisationByUserId(user.id);
     }
 

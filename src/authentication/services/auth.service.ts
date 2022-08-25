@@ -57,7 +57,7 @@ export default class AuthenticationService {
             expiresIn: `${this.configService.get<number>("JWT_ACCESS_TOKEN_EXPIRATION_TIME")}s`,
         });
         return {
-            cookie: `accessToken=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+            cookie: `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
                 "JWT_ACCESS_TOKEN_EXPIRATION_TIME",
             )}`,
             token,

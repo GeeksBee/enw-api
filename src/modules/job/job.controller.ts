@@ -1,9 +1,10 @@
 import { apiTags } from "src/common/constants/swagger.constants";
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from "@nestjs/common";
 import { JobService } from "./job.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { ApiTags } from "@nestjs/swagger";
+import { Request } from "express";
 
 @Controller("job")
 @ApiTags(apiTags.Job)
@@ -21,7 +22,8 @@ export class JobController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string) {
+    findOne(@Param("id") id: string, @Req() request: Request) {
+        console.log(request);
         return this.jobService.findOne(+id);
     }
 

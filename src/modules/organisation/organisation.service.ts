@@ -43,9 +43,9 @@ export class OrganisationService {
     }
 
     public getOrganisationByUserId(userId: number) {
-        return this.organisationRepository.findOne({
+        return this.organisationRepository.findOneOrFail({
             where: {
-                user: userId,
+                user: { id: userId },
             },
         });
     }
