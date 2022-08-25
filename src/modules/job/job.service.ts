@@ -3,7 +3,6 @@ import { EmailService } from "src/email/email.service";
 import { Between } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
-import { UpdateJobDto } from "./dto/update-job.dto";
 import { Job } from "./entities/job.entity";
 
 @Injectable()
@@ -37,11 +36,10 @@ export class JobService {
         return jobs;
     }
 
-    async incrementView() {
-        return Job.createQueryBuilder()
-            .update(Job)
-            .set({ viewCount: () => "viewCount + 1" })
-            .execute();
+    async incrementView(jobId: number) {
+        const job = await Job.findOne(jobId);
+        job.viewcount++;
+        await Job.save(job);
     }
 
     async findOne(id: number) {

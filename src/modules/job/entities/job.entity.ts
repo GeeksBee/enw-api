@@ -81,7 +81,7 @@ export class Job extends BaseEntity {
     organisation: Organisation;
 
     @Column({ nullable: true })
-    viewCount: number;
+    viewcount: number;
 
     @Column({
         type: "boolean",
@@ -148,6 +148,7 @@ export class Job extends BaseEntity {
 
     @Column({
         type: "simple-array",
+        nullable: true,
     })
     skills: SkillsEnum[];
 }
