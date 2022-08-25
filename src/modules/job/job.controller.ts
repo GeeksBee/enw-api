@@ -30,7 +30,7 @@ export class JobController {
     constructor(private readonly jobService: JobService) {}
 
     @Post()
-    // @UseGuards(RoleGuard([UserRole.EMPLOYER]))
+    @UseGuards(RoleGuard([UserRole.EMPLOYER]))
     create(@Body() createJobDto: CreateJobDto, @Req() request: Request) {
         // console.log("employer user ", request.user);
         return this.jobService.create(createJobDto);
@@ -52,7 +52,6 @@ export class JobController {
         console.log(request);
         return this.jobService.findOne(+id);
     }
-
     @Patch(":id")
     update(@Param("id") id: string, @Body() updateJobDto: UpdateJobDto) {
         return this.jobService.update(+id, updateJobDto);

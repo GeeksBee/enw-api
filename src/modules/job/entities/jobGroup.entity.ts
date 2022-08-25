@@ -12,8 +12,26 @@ export class JobGroup {
         type: "varchar",
         nullable: true,
     })
-    name: string;
+    title: string;
 
     @ManyToOne(() => Job, (job) => job.jobGroup)
     jobs: Job[];
+
+    @Column()
+    path: string;
+
+    @Column({
+        nullable: true,
+    })
+    applicationLink: string;
+
+    @Column({
+        nullable: true,
+    })
+    description: string;
+
+    @Column({
+        default: false,
+    })
+    completed: boolean;
 }

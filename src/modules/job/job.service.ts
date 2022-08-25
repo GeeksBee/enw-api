@@ -5,8 +5,10 @@ import { Between, Repository } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { JobFilterDto } from "./dto/filter-dto";
+import { JobGroupDto } from "./dto/job-group-dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { Job } from "./entities/job.entity";
+import { JobGroup } from "./entities/jobGroup.entity";
 import { Skill } from "./entities/skill.entity";
 
 @Injectable()
@@ -15,6 +17,7 @@ export class JobService {
         private readonly emailService: EmailService,
         @InjectRepository(Skill) private readonly skillRepo: Repository<Skill>,
         @InjectRepository(Job) private readonly jobRepo: Repository<Job>,
+        @InjectRepository(JobGroup) private readonly jobGroupRepo: Repository<JobGroup>,
     ) {}
 
     async create(createJobDto: CreateJobDto) {
@@ -25,6 +28,12 @@ export class JobService {
         this.sendMailsToEligibleUsers(job);
 
         return job;
+    }
+
+    async createJobGroup(jobGroup: JobGroupDto) {
+        const newJobGroup = this.jobGroupRepo.create(jobGroup);
+        await this.jobRepo.save(newJobGroup);
+        return newJobGroup;
     }
 
     async findAllSkills() {
