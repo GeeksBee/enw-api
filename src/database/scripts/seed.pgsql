@@ -1,6 +1,7 @@
 -- delete from "enw_organisation_media";
 -- delete from "enw_organisation";
 -- delete from "enw_payment";
+DELETE FROM "skill";
 DELETE FROM "organisation";
 delete from "enw_session";
 delete from "enw_user";
@@ -13,6 +14,20 @@ VALUES
 (2,  'Admin', 'admin.one@enw.in' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '1', TRUE, TRUE),
 (3,  'Employer 1', 'employer.one@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '2', TRUE, TRUE),
 (4,  'Applicant 1', 'applicant.one@gmail.com' ,'$2b$10$k1TLQEOc/jDVCExhba8kqeuCQdBlyytZqExLCt0Fr7GTG4sQDg4WS', '3', TRUE, TRUE);
+
+
+INSERT INTO "skill"
+("name")
+VALUES 
+('Typing'),
+('Stenographer'),
+('Accounting'),
+('English'),
+('Hindi'),
+('Driver'),
+('Technician'),
+('IT');
+
 
 SELECT * FROM "enw_user";
 
