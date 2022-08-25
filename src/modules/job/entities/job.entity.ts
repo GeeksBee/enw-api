@@ -7,10 +7,15 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    JoinColumn,
+    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { JobGroup } from "./jobGroup.entity";
+import { Skill } from "./skill.entity";
 
 export enum SkillsEnum {
     "Master of Art (M.A)" = "Master of Art (M.A)",
@@ -80,6 +85,12 @@ export class Job extends BaseEntity {
     @ManyToOne(() => Organisation)
     organisation: Organisation;
 
+    @OneToMany(() => JobGroup, (group) => group.jobs)
+    @JoinColumn({
+        name: "job_group_id",
+    })
+    jobGroup: JobGroup;
+
     @Column({ nullable: true })
     viewcount: number;
 
@@ -146,9 +157,7 @@ export class Job extends BaseEntity {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @Column({
-        type: "simple-array",
-        nullable: true,
-    })
-    skills: SkillsEnum[];
+    @ManyToMany(() => Skill, (skill) => skill.jobs)
+    @JoinColumn()
+    skills: Skill[];
 }

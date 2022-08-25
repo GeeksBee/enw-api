@@ -1,13 +1,18 @@
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 import { EmailService } from "src/email/email.service";
-import { Between } from "typeorm";
+import { Between, Repository } from "typeorm";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { Job } from "./entities/job.entity";
+import { Skill } from "./entities/skill.entity";
 
 @Injectable()
 export class JobService {
-    constructor(private readonly emailService: EmailService) {}
+    constructor(
+        private readonly emailService: EmailService,
+        @InjectRepository(Skill) private readonly skillRepo: Repository<Skill>,
+    ) {}
     async create(createJobDto: CreateJobDto) {
         const job = Job.create(createJobDto);
         await Job.save(job);
@@ -16,6 +21,10 @@ export class JobService {
         this.sendMailsToEligibleUsers(job);
 
         return job;
+    }
+
+    async findAllSkills() {
+        return this.skillRepo.find();
     }
 
     async findAll() {
