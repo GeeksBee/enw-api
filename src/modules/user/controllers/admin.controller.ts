@@ -1,4 +1,16 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Post } from "@nestjs/common";
+import UserService from "../services/user.service";
 
 @Controller("user/admin")
-export class AdminController {}
+export class AdminController {
+    constructor(private readonly userService: UserService) {}
+
+    // @Post("user/bar/:userId")
+    // public barUser() {
+    //     const user = await this.userService.barUser();
+    //     return;
+    // }
+
+    // @Post("user/unbar/:userId")
+    // public unbarUser() {}
+}

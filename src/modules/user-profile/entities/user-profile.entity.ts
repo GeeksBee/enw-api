@@ -110,6 +110,7 @@ export class UserProfile extends BaseEntity {
 
     @Column({
         type: "simple-array",
+        nullable: true,
     })
     skills: SkillsEnum[];
 

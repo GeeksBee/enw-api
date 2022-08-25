@@ -80,6 +80,23 @@ export class Job extends BaseEntity {
     @ManyToOne(() => Organisation)
     organisation: Organisation;
 
+    @Column({ nullable: true })
+    viewcount: number;
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    published: boolean; // admin access
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    visible: boolean; // employer access
+
     @Column()
     minAge: number;
 
@@ -114,6 +131,12 @@ export class Job extends BaseEntity {
     })
     state: StateEnum;
 
+    @Column({
+        type: "date",
+        nullable: true,
+    })
+    lastDateOfApplication: Date;
+
     @CreateDateColumn()
     createdAt: Date;
 
@@ -125,6 +148,7 @@ export class Job extends BaseEntity {
 
     @Column({
         type: "simple-array",
+        nullable: true,
     })
     skills: SkillsEnum[];
 }

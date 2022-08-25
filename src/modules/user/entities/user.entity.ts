@@ -74,6 +74,13 @@ export class User extends BaseEntity {
     })
     role: UserRole;
 
+    @Column({
+        type: "enum",
+        enum: UserRole,
+        default: UserRole.GHOST,
+    })
+    previousRole: UserRole;
+
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
 

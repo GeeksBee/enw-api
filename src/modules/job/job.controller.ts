@@ -27,7 +27,8 @@ export class JobController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string, @Req() request: Request) {
+    async findOne(@Param("id") id: number, @Req() request: Request) {
+        await this.jobService.incrementView(id);
         console.log(request);
         return this.jobService.findOne(+id);
     }
