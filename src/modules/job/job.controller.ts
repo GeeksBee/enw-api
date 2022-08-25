@@ -64,6 +64,11 @@ export class JobController {
         return this.jobService.createJobGroup(body);
     }
 
+    @Get("group/incomplete")
+    async findIncompleteJobGroups() {
+        return this.jobService.findIncompleteJobGroups();
+    }
+
     @Get("search/:search")
     async search(@Param("search") search: string) {
         return this.jobService.search(search);

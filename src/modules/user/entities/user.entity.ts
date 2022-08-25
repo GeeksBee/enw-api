@@ -4,6 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
@@ -11,6 +12,7 @@ import {
 } from "typeorm";
 import Organisation from "src/modules/organisation/entities/organisation.entity";
 import { UserProfile } from "src/modules/user-profile/entities/user-profile.entity";
+import { Remainder } from "src/modules/user-profile/entities/Remainder.entity";
 
 export enum UserRole {
     SUPERADMIN,
@@ -95,6 +97,10 @@ export class User extends BaseEntity {
 
     @OneToOne(() => UserProfile, (userProfile) => userProfile.user)
     userProfile: UserProfile;
+
+    @OneToMany(() => Remainder, (remainder) => remainder.user, { eager: true })
+    @JoinColumn()
+    remainders: Remainder[];
 }
 
 export default User;

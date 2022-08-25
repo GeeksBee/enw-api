@@ -142,4 +142,13 @@ export class JobService {
         });
         return jobs;
     }
+
+    async findIncompleteJobGroups(): Promise<JobGroup[]> {
+        const jobGroups = await this.jobGroupRepo.find({
+            where: {
+                isComplete: false,
+            },
+        });
+        return jobGroups;
+    }
 }
