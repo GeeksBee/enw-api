@@ -17,10 +17,20 @@ export class OrganisationService {
         private readonly userService: UserService,
     ) {}
 
+    public findAll() {
+        return this.organisationRepository.find();
+    }
+
+    public findById(id: number) {
+        return this.organisationRepository.findOne(id, {
+            relations: ["jobs"],
+        });
+    }
+
     public async createOrganisation(email: string) {
         const user = await this.userService.getByEmail(email);
         if (user) {
-            const organisation = this.organisationRepository.create({ user });
+            const organisation = this.organisationRepository.create({ user, name: user.name });
             return this.organisationRepository.save(organisation);
         }
         throw new NotFoundException(`user with the email ${email} does not exist`);
@@ -39,7 +49,9 @@ export class OrganisationService {
     }
 
     public getOrganisationById(id: number) {
-        return this.organisationRepository.findOne(id);
+        return this.organisationRepository.findOne(id, {
+            relations: ["jobs"],
+        });
     }
 
     public getOrganisationByUserId(userId: number) {
@@ -47,6 +59,7 @@ export class OrganisationService {
             where: {
                 user: { id: userId },
             },
+            relations: ["jobs"],
         });
     }
 
