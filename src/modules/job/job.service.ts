@@ -15,6 +15,19 @@ export class JobService {
 
     async findAll() {
         const jobs = await Job.find();
+        jobs.forEach((job, index) => {
+            if (!jobs[index].address) {
+                jobs[index].address = {
+                    address1: null,
+                    address2: null,
+                    city: null,
+                    state: jobs[index].state,
+                    pincode: null,
+                    countryCode: null,
+                    district: null,
+                };
+            }
+        });
         return jobs;
     }
 
