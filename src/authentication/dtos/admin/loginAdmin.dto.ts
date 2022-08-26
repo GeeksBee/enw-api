@@ -18,7 +18,7 @@ class LoginAdminDto {
     @ApiProperty({
         description:
             "Has to match a regular expression: /((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/",
-        example: "AdminUserPassword@69",
+        example: "Root@69",
     })
     password: string;
 }

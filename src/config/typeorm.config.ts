@@ -18,7 +18,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
 
             entities: ["dist/**/**/*.entity.js"],
 
-            synchronize: true,
+            synchronize: false,
             logging: true,
 
             migrationsTableName: "migration",
