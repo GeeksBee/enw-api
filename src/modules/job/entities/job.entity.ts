@@ -69,6 +69,15 @@ export enum StateEnum {
     "Andaman and Nicobar Islands" = "Andaman and Nicobar Islands",
 }
 
+export enum CategoryEnum {
+    GEN,
+    GEN_EWS,
+    OBC,
+    OBC_NCL,
+    ST,
+    SC,
+}
+
 @Entity()
 export class Job {
     @PrimaryGeneratedColumn()
@@ -83,6 +92,9 @@ export class Job {
     @ManyToOne(() => Organisation, (org) => org.jobs)
     @JoinColumn({ name: "organisation_id" })
     organisation: Organisation;
+
+    @Column({ nullable: false, default: 1 })
+    organisationId: number;
 
     @OneToMany(() => JobGroup, (group) => group.jobs)
     @JoinColumn({
@@ -120,6 +132,19 @@ export class Job {
         start: number;
         end: number;
         meta?: string;
+    };
+
+    @Column({
+        type: "json",
+        nullable: true,
+    })
+    vacancy: {
+        GEN: number;
+        GEN_EWS: number;
+        OBC: number;
+        ST: number;
+        SC: number;
+        PWD: number;
     };
 
     @Column()
