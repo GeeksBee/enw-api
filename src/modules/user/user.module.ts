@@ -3,6 +3,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { JobModule } from "../job/job.module";
 import Organisation from "../organisation/entities/organisation.entity";
 import { OrganisationModule } from "../organisation/organisation.module";
+import { Remainder } from "../user-profile/entities/remainder.entity";
 import { AdminController } from "./controllers/admin.controller";
 import { ApplicantController } from "./controllers/applicant.controller";
 import { EmployerController } from "./controllers/employer.controller";
@@ -17,7 +18,7 @@ import UserService from "./services/user.service";
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User, Organisation, Newsletter]),
+        TypeOrmModule.forFeature([User, Organisation, Newsletter, Remainder]),
         forwardRef(() => OrganisationModule),
         JobModule,
     ],

@@ -8,13 +8,9 @@ import {
     PrimaryGeneratedColumn,
 } from "typeorm";
 
-@Entity({
-    name: "enw_session",
-})
+@Entity()
 export class Session {
-    @PrimaryGeneratedColumn({
-        name: "session_id",
-    })
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({
