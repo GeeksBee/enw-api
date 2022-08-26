@@ -158,10 +158,11 @@ export class Job {
     };
 
     @Column({
-        type: "simple-array",
+        type: "enum",
+        enum: QualificationEnum,
         nullable: true,
     })
-    qualification: QualificationEnum[];
+    qualifications: QualificationEnum[];
 
     @Column()
     yearsOfExperience: number;

@@ -16,18 +16,9 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
     @IsOptional()
     @ApiProperty({
         example: [
-            {
-                id: 1,
-                name: "Typing",
-            },
-            {
-                id: 2,
-                name: "Stenographer",
-            },
-            {
-                id: 3,
-                name: "Accounting",
-            },
+            "Master of Art (M.A)",
+            "Master of Science (M.Sc/M.S)",
+            "Bachelor of Veterinary Science",
         ],
     })
     skills: SkillsEnum[];

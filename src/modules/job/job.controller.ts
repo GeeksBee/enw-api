@@ -101,6 +101,7 @@ export class JobController {
     }
 
     @Patch(":id")
+    @ApiBody({ type: UpdateJobDto })
     update(@Param("id") id: string, @Body() updateJobDto: UpdateJobDto) {
         return this.jobService.update(+id, updateJobDto);
     }
