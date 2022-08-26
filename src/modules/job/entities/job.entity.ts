@@ -93,6 +93,9 @@ export class Job {
     @JoinColumn({ name: "organisation_id" })
     organisation: Organisation;
 
+    @Column({ nullable: false, default: 1 })
+    organisationId: number;
+
     @OneToMany(() => JobGroup, (group) => group.jobs)
     @JoinColumn({
         name: "job_group_id",

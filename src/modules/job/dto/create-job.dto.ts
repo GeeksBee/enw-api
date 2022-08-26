@@ -13,7 +13,7 @@ export class CreateJobDto {
 
     @IsNumber()
     @IsNotEmpty()
-    organisation: number;
+    organisationId: number;
 
     @IsNumber()
     @IsNotEmpty()
@@ -33,7 +33,7 @@ export class CreateJobDto {
         end: number;
     };
 
-    @IsNotEmpty()
+    @IsOptional()
     @ApiProperty()
     vacancy: {
         GEN: number;

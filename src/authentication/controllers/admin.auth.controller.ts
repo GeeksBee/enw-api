@@ -6,13 +6,14 @@ import RequestWithUser from "../interfaces/requestWithUser.interface";
 import AuthenticationService from "../services/auth.service";
 import { omit } from "lodash";
 import User, { userPrivateFields, UserRole } from "src/modules/user/entities/user.entity";
-import { ApiBody, ApiCookieAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiCookieAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 import LoginAdminDto from "../dtos/admin/loginAdmin.dto";
 import LoginAdminResponseDto from "../dtos/responses/loginAdminResponse.dto";
 import { ApiErrorResponse } from "src/common/decorators/apiResponses/apiErrorRes.decorator";
 import RoleGuard from "../guards/role.guard";
 import { apiTags } from "src/common/constants/swagger.constants";
 
+@ApiBearerAuth("Authorization")
 @Controller("authentication/admin")
 export default class AdminAuthenticationController {
     constructor(
