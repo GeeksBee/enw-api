@@ -204,7 +204,7 @@ export class JobService {
     async findIncompleteJobGroups(): Promise<JobGroup[]> {
         const jobGroups = await this.jobGroupRepo.find({
             where: {
-                isComplete: false,
+                completed: false,
             },
         });
         return jobGroups;
