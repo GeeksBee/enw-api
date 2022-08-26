@@ -16,7 +16,6 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import { JobGroup } from "./jobGroup.entity";
-import { Skill } from "./skill.entity";
 
 export enum SkillsEnum {
     "Master of Art (M.A)" = "Master of Art (M.A)",
@@ -85,6 +84,13 @@ export enum QualificationEnum {
     POST_GRADUATE = "POST_GRADUATE",
 }
 
+export enum Skill {
+    English,
+    Hindi,
+    Accounting,
+    Typing,
+}
+
 @Entity()
 export class Job {
     @PrimaryGeneratedColumn()
@@ -151,8 +157,11 @@ export class Job {
         PWD: number;
     };
 
-    @Column()
-    qualification: QualificationEnum;
+    @Column({
+        type: "simple-array",
+        nullable: true,
+    })
+    qualification: QualificationEnum[];
 
     @Column()
     yearsOfExperience: number;
@@ -188,9 +197,10 @@ export class Job {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @ManyToMany(() => Skill, (skill) => skill.jobs)
-    @JoinTable({
-        name: "skills_on_jobs",
+    @Column({
+        type: "enum",
+        enum: SkillsEnum,
+        nullable: true,
     })
-    skills: Skill[];
+    skills: SkillsEnum[];
 }

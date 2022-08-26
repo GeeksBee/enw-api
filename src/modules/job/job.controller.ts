@@ -93,11 +93,6 @@ export class JobController {
         return this.jobService.findAll();
     }
 
-    @Get("skill")
-    findAllSkills() {
-        return this.jobService.findAllSkills();
-    }
-
     @Get(":id")
     async findOne(@Param("id") id: number, @Req() request: Request) {
         await this.jobService.incrementView(id);

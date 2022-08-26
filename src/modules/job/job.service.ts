@@ -10,13 +10,11 @@ import { JobGroupDto } from "./dto/job-group-dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
 import { Job } from "./entities/job.entity";
 import { JobGroup } from "./entities/jobGroup.entity";
-import { Skill } from "./entities/skill.entity";
 
 @Injectable()
 export class JobService {
     constructor(
         private readonly emailService: EmailService,
-        @InjectRepository(Skill) private readonly skillRepo: Repository<Skill>,
         @InjectRepository(Job) private readonly jobRepo: Repository<Job>,
         @InjectRepository(JobGroup) private readonly jobGroupRepo: Repository<JobGroup>,
         @InjectRepository(Remainder) private readonly remainderRepo: Repository<Remainder>,
@@ -51,10 +49,6 @@ export class JobService {
         await newRemainder.save();
 
         return newJobGroup;
-    }
-
-    async findAllSkills() {
-        return this.skillRepo.find();
     }
 
     async findAll() {
