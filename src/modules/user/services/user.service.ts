@@ -15,7 +15,7 @@ export default class UserService {
         return this.userRepository.findOne({ email });
     }
     public getByPhone(phone: string): Promise<User> {
-        return this.userRepository.findOne({ phone });
+        return this.userRepository.findOne({ phone }, { relations: ["userProfile"] });
     }
 
     public async verifyEmail(userId: number): Promise<User> {

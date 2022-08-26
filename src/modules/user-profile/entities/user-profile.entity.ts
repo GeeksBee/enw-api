@@ -120,9 +120,4 @@ export class UserProfile extends BaseEntity {
         nullable: true,
     })
     skills: SkillsEnum[];
-
-    @AfterLoad()
-    serialize() {
-        userPrivateFields.forEach((field) => (this.user[field] = undefined));
-    }
 }

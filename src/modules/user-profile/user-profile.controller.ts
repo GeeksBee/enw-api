@@ -2,7 +2,7 @@ import { UserProfile } from "src/modules/user-profile/entities/user-profile.enti
 import { Controller, Get, Body, Patch, Param, Delete, UseGuards, Req } from "@nestjs/common";
 import { UserProfileService } from "./user-profile.service";
 import { UpdateUserProfileDto } from "./dto/update-user-profile.dto";
-import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { apiTags } from "src/common/constants/swagger.constants";
 import RoleGuard from "src/authentication/guards/role.guard";
 import { UserRole } from "../user/entities/user.entity";
@@ -33,5 +33,12 @@ export class UserProfileController {
     ): Promise<UserProfile> {
         const user = request.user;
         return this.userProfileService.updateUserProfile(user.id, updateUserProfileDto);
+    }
+
+    @ApiTags(apiTags.UserProfile)
+    @ApiParam({ name: "phone", example: "9999999999" })
+    @Get(":phone")
+    getWithPhone(@Param("phone") phone: string) {
+        return this.userProfileService.getWithPhone(phone);
     }
 }

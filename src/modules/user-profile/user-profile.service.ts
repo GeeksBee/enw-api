@@ -14,6 +14,10 @@ export class UserProfileService {
         private readonly userService: UserService,
     ) {}
 
+    getWithPhone(phone: string) {
+        return this.userService.getByPhone(phone);
+    }
+
     async createUserProfile(phone: string) {
         const user = await this.userService.getByPhone(phone);
         if (user) {
