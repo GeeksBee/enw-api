@@ -20,13 +20,9 @@ export enum PaymentStatus {
     PAID,
 }
 
-@Entity({
-    name: "enw_payment",
-})
+@Entity()
 export class Payment {
-    @PrimaryGeneratedColumn({
-        name: "payment_id",
-    })
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({

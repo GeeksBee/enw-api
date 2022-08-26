@@ -13,4 +13,8 @@ export default class NewsletterService {
         const ns = this.nsRepo.create({ filename });
         return this.nsRepo.save(ns);
     }
+
+    public findAll() {
+        return this.nsRepo.find();
+    }
 }

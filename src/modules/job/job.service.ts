@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EmailService } from "src/email/email.service";
 import { Between, Like, Repository } from "typeorm";
-import { Remainder } from "../user-profile/entities/Remainder.entity";
+import { Remainder } from "src/modules/user-profile/entities/remainder.entity";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { JobFilterDto } from "./dto/filter-dto";

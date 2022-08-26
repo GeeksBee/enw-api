@@ -55,4 +55,9 @@ export class NewsletterController {
         const file = createReadStream(join(process.cwd(), `/uploads/${name}`));
         return file.pipe(res);
     }
+
+    @Get("all")
+    getAll() {
+        return this.nsService.findAll();
+    }
 }
