@@ -39,7 +39,8 @@ export class JobService {
 
     async createJobGroup(jobGroup: JobGroupDto) {
         const newJobGroup = this.jobGroupRepo.create(jobGroup);
-        await this.jobRepo.save(newJobGroup);
+        await this.jobGroupRepo.save(newJobGroup);
+        // await this.
         return newJobGroup;
     }
 
@@ -134,6 +135,43 @@ export class JobService {
         }
         return success;
     }
+
+    async sendReminderMailsCron() {
+        const jobs = await this.jobRepo.find({
+            where: {
+                lastDateOfApplication: Between(new Date(Date.now() - 1000 * 3600 * 24), new Date()),
+            },
+        });
+
+        console.log({
+            location: "sendReminderMailsCron",
+            jobs,
+        });
+
+        for (let i = 0; i < jobs.length; i++) {
+            const job = jobs[i];
+            const eligibleUsers = await this.getEligibleUsers(job);
+            await this.sendReminderMailToUsers(eligibleUsers, job);
+        }
+    }
+    async sendReminderMailToUsers(users: User[], job: Job): Promise<boolean[]> {
+        const success = [];
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            try {
+                if (user.email) {
+                    await this.emailService.sendReminderMail(user, job);
+                    success.push(true);
+                } else {
+                    success.push(false);
+                }
+            } catch (e) {
+                success.push(false);
+            }
+        }
+        return success;
+    }
+
     async filterJobs(filterDto: JobFilterDto): Promise<Job[]> {
         const jobs = this.jobRepo.find({
             where: {},

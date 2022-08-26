@@ -44,6 +44,7 @@
         "class-transformer": "^0.5.1",
         "class-validator": "^0.13.2",
         "cookie-parser": "^1.4.6",
+        "cron": "^2.1.0",
         "dotenv": "^8.6.0",
         "eslint-plugin-import": "^2.26.0",
         "express-basic-auth": "^1.2.1",

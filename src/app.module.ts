@@ -10,11 +10,12 @@ import configValidationSchema from "./config/configValidationSchema";
 import { LoggerMiddleware } from "./common/middlewares/logRequest.middleware";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { PhoneModule } from "./phone/phone.module";
-import { OrganisationModule } from './modules/organisation/organisation.module';
-import { PaymentModule } from './payment/payment.module';
-import { JobModule } from './modules/job/job.module';
-import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { OrganisationModule } from "./modules/organisation/organisation.module";
+import { PaymentModule } from "./payment/payment.module";
+import { JobModule } from "./modules/job/job.module";
+import { UserProfileModule } from "./modules/user-profile/user-profile.module";
 import getEnvFilePath from "./common/utils/getEnvFilePath";
+import { CronModule } from "./cron/cron.module";
 
 @Module({
     imports: [
@@ -33,6 +34,7 @@ import getEnvFilePath from "./common/utils/getEnvFilePath";
         PaymentModule,
         JobModule,
         UserProfileModule,
+        CronModule,
     ],
     controllers: [AppController],
     providers: [AppService],
