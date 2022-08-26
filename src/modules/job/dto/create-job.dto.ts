@@ -13,7 +13,7 @@ export class CreateJobDto {
 
     @IsNumber()
     @IsNotEmpty()
-    organisationId: number;
+    organisation: number;
 
     @IsNumber()
     @IsNotEmpty()
