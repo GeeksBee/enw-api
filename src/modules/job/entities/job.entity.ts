@@ -158,8 +158,7 @@ export class Job {
     };
 
     @Column({
-        type: "enum",
-        enum: QualificationEnum,
+        type: "simple-array",
         nullable: true,
     })
     qualifications: QualificationEnum[];
@@ -199,8 +198,7 @@ export class Job {
     deletedAt: Date;
 
     @Column({
-        type: "enum",
-        enum: SkillsEnum,
+        type: "simple-array",
         nullable: true,
     })
     skills: SkillsEnum[];

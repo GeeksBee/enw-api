@@ -17,8 +17,9 @@ export class UpdateJobDto extends PartialType(CreateJobDto) {
     @ApiProperty({
         example: [
             "Master of Art (M.A)",
-            "Master of Science (M.Sc/M.S)",
+            "Master of Science (M.Sc/M.S",
             "Bachelor of Veterinary Science",
+            "Bachelor of Medicine",
         ],
     })
     skills: SkillsEnum[];
