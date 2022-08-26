@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { EmailService } from "src/email/email.service";
 import { Between, Like, Repository } from "typeorm";
 import { Remainder } from "src/modules/user-profile/entities/remainder.entity";
-import User from "../user/entities/user.entity";
+import User, { UserRole } from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { JobFilterDto } from "./dto/filter-dto";
 import { JobGroupDto } from "./dto/job-group-dto";
@@ -108,20 +108,30 @@ export class JobService {
     }
 
     async getEligibleUsers(job: Job): Promise<User[]> {
-        const users = await User.find({
+        // const users = await User.find({
+        //     where: {
+        //         userProfile: {
+        //             // yearsOfExperience: {
+        //             //     gte: job.yearsOfExperience,
+        //             // },
+        //             // salaryRange: {
+        //             //     gte: job.salaryRange.start,
+        //             //     lte: job.salaryRange.end,
+        //             // },
+        //             age: Between(job.minAge, job.maxAge),
+        //         },
+        //     },
+        //     relations: ["userProfile"],
+        // });
+
+        let users = await User.find({
             where: {
-                userProfile: {
-                    // yearsOfExperience: {
-                    //     gte: job.yearsOfExperience,
-                    // },
-                    // salaryRange: {
-                    //     gte: job.salaryRange.start,
-                    //     lte: job.salaryRange.end,
-                    // },
-                    age: Between(job.minAge, job.maxAge),
-                },
+                role: UserRole.APPLICANT,
             },
-            relations: ["userProfile"],
+        });
+
+        users = users.filter((user) => {
+            if (job.vacancy[user.userProfile.category] > 0) true;
         });
 
         return users;

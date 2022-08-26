@@ -70,12 +70,19 @@ export enum StateEnum {
 }
 
 export enum CategoryEnum {
-    GEN,
-    GEN_EWS,
-    OBC,
-    OBC_NCL,
-    ST,
-    SC,
+    GEN = "GEN",
+    GEN_EWS = "GEN_EWS",
+    OBC = "OBC",
+    OBC_NCL = "OBC_NCL",
+    ST = "ST",
+    SC = "SC",
+}
+
+export enum QualificationEnum {
+    MATRIC = "MATRIC",
+    PLUS_2 = "PLUS_2",
+    GRADUATE = "GRADUATE",
+    POST_GRADUATE = "POST_GRADUATE",
 }
 
 @Entity()
@@ -143,6 +150,9 @@ export class Job {
         SC: number;
         PWD: number;
     };
+
+    @Column()
+    qualification: QualificationEnum;
 
     @Column()
     yearsOfExperience: number;
