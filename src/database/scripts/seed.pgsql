@@ -23,7 +23,7 @@ VALUES
 
 
 INSERT INTO "user"
-("id","name", "phone","role","is_email_confirmed", "is_phone_confirmed")
+("id","name", "phone", "role", "is_email_confirmed", "is_phone_confirmed")
 VALUES
 (10041,  'Applicant 1', '6969696960' , '3', TRUE, TRUE),
 (10042,  'Applicant 2', '6969696961' , '3', TRUE, TRUE),
@@ -48,12 +48,12 @@ VALUES
 
 select * from "user";
 
-INSERT INTO "user"
-("id","name", "phone","role","is_email_confirmed", "is_phone_confirmed")
+INSERT INTO "user_profile"
+("user_profile_id","description", "age","isPWD","category", "gender" )
 VALUES
 (10041,  'Applicant 1', '6969696960' , '3', TRUE, TRUE),
 (10042,  'Applicant 2', '6969696961' , '3', TRUE, TRUE),
-(10043,  'Applicant 3', '696969696' , '3', TRUE, TRUE),
+(10043,  'Applicant 3', '6969696962' , '3', TRUE, TRUE),
 (10044,  'Applicant 4', '6969696963' , '3', TRUE, TRUE),
 (10045,  'Applicant 5', '6969696964' , '3', TRUE, TRUE),
 (10046,  'Applicant 6', '6969696965' , '3', TRUE, TRUE),
