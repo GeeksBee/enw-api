@@ -6,8 +6,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { JobGroup } from "./entities/jobGroup.entity";
 import { Job } from "./entities/job.entity";
 import { Skill } from "./entities/skill.entity";
-import { UserModule } from "../user/user.module";
-import { Remainder } from "../user-profile/entities/Remainder.entity";
+import { UserModule } from "src/modules/user/user.module";
+import { Remainder } from "src/modules/user-profile/entities/Remainder.entity";
 
 @Module({
     imports: [EmailModule, TypeOrmModule.forFeature([Job, JobGroup, Skill, Remainder])],
