@@ -17,7 +17,7 @@ import {
 import { JobService } from "./job.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { Request, Response } from "express";
 import RoleGuard from "src/authentication/guards/role.guard";
 import { UserRole } from "../user/entities/user.entity";
@@ -47,6 +47,18 @@ export class JobController {
 
     @Post("upload")
     @UseInterceptors(FileInterceptor("file", multerConfig))
+    @ApiConsumes("multipart/form-data")
+    @ApiBody({
+        schema: {
+            type: "object",
+            properties: {
+                file: {
+                    type: "string",
+                    format: "binary",
+                },
+            },
+        },
+    })
     uploadFile(@UploadedFile() file: Express.Multer.File) {
         console.log(file);
 
