@@ -12,7 +12,7 @@ import {
 } from "typeorm";
 import Organisation from "src/modules/organisation/entities/organisation.entity";
 import { UserProfile } from "src/modules/user-profile/entities/user-profile.entity";
-import { Remainder } from "../../user-profile/entities/remainder.entity";
+import { Remainder } from "src/modules/user-profile/entities/remainder.entity";
 
 export enum UserRole {
     SUPERADMIN,
