@@ -90,11 +90,8 @@ export class Job {
     description: string;
 
     @ManyToOne(() => Organisation, (org) => org.jobs)
-    @JoinColumn({ name: "organisation_id" })
+    @JoinColumn()
     organisation: Organisation;
-
-    @Column({ nullable: false, default: 1 })
-    organisationId: number;
 
     @OneToMany(() => JobGroup, (group) => group.jobs)
     @JoinColumn({

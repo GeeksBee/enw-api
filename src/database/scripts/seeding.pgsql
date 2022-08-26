@@ -1,7 +1,5 @@
-# Seeding
-
 INSERT INTO "job" 
-("title", "description", "organisationId", "minAge", "maxAge", "salaryRange", "yearsOfExperience", "state", "lastDateOfApplication" )
+("title", "description", "organisation_id", "minAge", "maxAge", "salaryRange", "yearsOfExperience", "state", "lastDateOfApplication" )
 VALUES 
 ('Director', 'Director of GST Council Secretariat', '3', '28', '35', '{"start": 2000 , "end": 8000}', '15', 'Goa', '2022-10-12' ),
 ('Deputy Secretary', 'Deputy Secretary of GST Council Secretariat', '3', '28', '35', '{"start": 2000 , "end": 8000}', '10', 'Goa', '2022-10-20' ),
