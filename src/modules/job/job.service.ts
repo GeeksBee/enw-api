@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EmailService } from "src/email/email.service";
 import { Between, Like, Repository } from "typeorm";
+import { Remainder } from "../user-profile/entities/Remainder.entity";
 import User from "../user/entities/user.entity";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { JobFilterDto } from "./dto/filter-dto";
@@ -18,6 +19,7 @@ export class JobService {
         @InjectRepository(Skill) private readonly skillRepo: Repository<Skill>,
         @InjectRepository(Job) private readonly jobRepo: Repository<Job>,
         @InjectRepository(JobGroup) private readonly jobGroupRepo: Repository<JobGroup>,
+        @InjectRepository(Remainder) private readonly remainderRepo: Repository<Remainder>,
     ) {}
 
     public countJob() {
@@ -37,10 +39,17 @@ export class JobService {
         return job;
     }
 
-    async createJobGroup(jobGroup: JobGroupDto) {
+    async createJobGroup(jobGroup: JobGroupDto, user: User) {
         const newJobGroup = this.jobGroupRepo.create(jobGroup);
-        await this.jobGroupRepo.save(newJobGroup);
-        // await this.
+        const result = await this.jobGroupRepo.save(newJobGroup);
+        const newRemainder = this.remainderRepo.create({
+            title: "New Job Group Created",
+            description: `Job Group Created By Organisation: ${result.title}`,
+            location: `jobgroup/${result.id}`,
+            user,
+        });
+        await newRemainder.save();
+
         return newJobGroup;
     }
 

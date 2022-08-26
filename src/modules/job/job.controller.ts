@@ -27,6 +27,7 @@ import { multerConfig } from "src/config/module.config";
 import { JobGroupDto } from "./dto/job-group-dto";
 import { createReadStream } from "fs";
 import { join } from "path";
+import JwtAuthenticationGuard from "src/authentication/guards/jwtAuthentication.guard";
 
 @Controller("job")
 @ApiTags(apiTags.Job)
@@ -72,8 +73,9 @@ export class JobController {
     }
 
     @Post("group")
-    async createJobGroup(@Body() body: JobGroupDto) {
-        return this.jobService.createJobGroup(body);
+    @UseGuards(JwtAuthenticationGuard)
+    async createJobGroup(@Body() body: JobGroupDto, @Req() request: RequestWithUser) {
+        return this.jobService.createJobGroup(body, request.user);
     }
 
     @Get("group/incomplete")
@@ -102,6 +104,7 @@ export class JobController {
         console.log(request);
         return this.jobService.findOne(+id);
     }
+
     @Patch(":id")
     update(@Param("id") id: string, @Body() updateJobDto: UpdateJobDto) {
         return this.jobService.update(+id, updateJobDto);
