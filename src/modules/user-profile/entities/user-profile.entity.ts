@@ -56,6 +56,13 @@ export class UserProfile extends BaseEntity {
     age: number;
 
     @Column({
+        type: "varchar",
+        nullable: true,
+        unique: true,
+    })
+    email: string;
+
+    @Column({
         type: "boolean",
         nullable: false,
         default: false,
