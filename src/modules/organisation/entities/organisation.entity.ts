@@ -1,6 +1,6 @@
-import User, { userPrivateFields } from "src/modules/user/entities/user.entity";
+import { Job } from "src/modules/job/entities/job.entity";
+import User from "src/modules/user/entities/user.entity";
 import {
-    AfterLoad,
     BaseEntity,
     Column,
     CreateDateColumn,
@@ -11,7 +11,6 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
-import { OrganisationMedia } from "./organisationMedia.entity";
 import OrganisationTypeEnum from "./organisationType.enum";
 
 @Entity()
@@ -38,6 +37,9 @@ export class Organisation extends BaseEntity {
         default: OrganisationTypeEnum.PUBLIC_SECTOR_UNDERTAKING,
     })
     organisationType: OrganisationTypeEnum;
+
+    @OneToMany(() => Job, (job) => job.organisation)
+    jobs: Job[];
 
     // details
     @Column({
@@ -88,9 +90,6 @@ export class Organisation extends BaseEntity {
     @OneToOne(() => User, (user) => user.organisation) // specify inverse side as a second parameter
     @JoinColumn({ name: "user_id" })
     user: User;
-
-    @OneToMany(() => OrganisationMedia, (media) => media.organisation) // specify inverse side as a second parameter
-    media: OrganisationMedia[];
 
     @CreateDateColumn()
     createdAt: Date;

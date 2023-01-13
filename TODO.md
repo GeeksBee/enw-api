@@ -6,15 +6,17 @@ Project Description
 
 ### Todo
 
-- [ ] add admin registration and authentication with email  
-- [ ] add user registration and authentication service with otp  
+-   [ ] add admin registration and authentication with email
+-   [ ] add user registration and authentication service with otp
 
 ### In Progress
 
-- [ ] add email service  
+-   [ ] add email service
 
 ### Done ✓
 
-- [x] add log request feture  
-- [x] apply custom  logger  
+-   [x] add log request feture
+-   [x] apply custom logger
 
+newsletter filename, createdAt
+getRoute

@@ -7,10 +7,16 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     Entity,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { JobGroup } from "./jobGroup.entity";
+import { Skill } from "./skill.entity";
 
 export enum SkillsEnum {
     "Master of Art (M.A)" = "Master of Art (M.A)",
@@ -63,8 +69,24 @@ export enum StateEnum {
     "Andaman and Nicobar Islands" = "Andaman and Nicobar Islands",
 }
 
+export enum CategoryEnum {
+    GEN = "GEN",
+    GEN_EWS = "GEN_EWS",
+    OBC = "OBC",
+    OBC_NCL = "OBC_NCL",
+    ST = "ST",
+    SC = "SC",
+}
+
+export enum QualificationEnum {
+    MATRIC = "MATRIC",
+    PLUS_2 = "PLUS_2",
+    GRADUATE = "GRADUATE",
+    POST_GRADUATE = "POST_GRADUATE",
+}
+
 @Entity()
-export class Job extends BaseEntity {
+export class Job {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -74,11 +96,32 @@ export class Job extends BaseEntity {
     @Column()
     description: string;
 
-    @Column()
-    organisationId: number;
-
-    @ManyToOne(() => Organisation)
+    @ManyToOne(() => Organisation, (org) => org.jobs)
+    @JoinColumn()
     organisation: Organisation;
+
+    @OneToMany(() => JobGroup, (group) => group.jobs)
+    @JoinColumn({
+        name: "job_group_id",
+    })
+    jobGroup: JobGroup;
+
+    @Column({ nullable: true })
+    viewcount: number;
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    published: boolean; // admin access
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: true,
+    })
+    visible: boolean; // employer access
 
     @Column()
     minAge: number;
@@ -95,10 +138,26 @@ export class Job extends BaseEntity {
         meta?: string;
     };
 
+    @Column({
+        type: "json",
+        nullable: true,
+    })
+    vacancy: {
+        GEN: number;
+        GEN_EWS: number;
+        OBC: number;
+        ST: number;
+        SC: number;
+        PWD: number;
+    };
+
+    @Column()
+    qualification: QualificationEnum;
+
     @Column()
     yearsOfExperience: number;
 
-    @Column()
+    @Column({ nullable: true })
     pincode: string;
 
     @Column({
@@ -114,6 +173,12 @@ export class Job extends BaseEntity {
     })
     state: StateEnum;
 
+    @Column({
+        type: "date",
+        nullable: true,
+    })
+    lastDateOfApplication: Date;
+
     @CreateDateColumn()
     createdAt: Date;
 
@@ -123,8 +188,9 @@ export class Job extends BaseEntity {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @Column({
-        type: "simple-array",
+    @ManyToMany(() => Skill, (skill) => skill.jobs)
+    @JoinTable({
+        name: "skills_on_jobs",
     })
-    skills: SkillsEnum[];
+    skills: Skill[];
 }

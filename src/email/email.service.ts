@@ -93,4 +93,21 @@ export class EmailService {
         };
         return this.sendMail(payload);
     }
+
+    async sendReminderMail(user: User, job: Job) {
+        const html = `<h1>Title: ${job.title}</h1>`;
+        const templateStr = fs
+            .readFileSync(path.resolve(__dirname, "templates/Reminder.hbs"))
+            .toString("utf8");
+        console.log(templateStr);
+
+        const template = Handlebars.compile(templateStr, { noEscape: true });
+        const payload = {
+            to: user.email,
+            from: this.configService.get<string>("EMAIL_USER"),
+            subject: "Reminder for Job - Apply Fast",
+            html: template({ name: `rahul` }),
+        };
+        return this.sendMail(payload);
+    }
 }

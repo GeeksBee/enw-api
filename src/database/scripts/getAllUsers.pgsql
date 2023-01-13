@@ -1,1 +1,1 @@
-SELECT * FROM "enw_user";
+SELECT * FROM "user";

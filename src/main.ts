@@ -1,3 +1,4 @@
+import { AppService } from "./app.service";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
@@ -35,6 +36,10 @@ async function bootstrap() {
             "Authorization",
         )
         .build();
+
+    const appService = app.get(AppService);
+    appService.startAllCrons();
+
     const document = SwaggerModule.createDocument(app, swaggerConfig);
     SwaggerModule.setup("docs", app, document);
     app.useGlobalPipes(new ValidationPipe());

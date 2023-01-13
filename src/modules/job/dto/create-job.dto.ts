@@ -1,4 +1,5 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { StateEnum } from "../entities/job.entity";
 
 export class CreateJobDto {
@@ -12,7 +13,7 @@ export class CreateJobDto {
 
     @IsNumber()
     @IsNotEmpty()
-    organisationId: number;
+    organisation_id: number;
 
     @IsNumber()
     @IsNotEmpty()
@@ -30,6 +31,17 @@ export class CreateJobDto {
     salaryRange: {
         start: number;
         end: number;
+    };
+
+    @IsOptional()
+    @ApiProperty()
+    vacancy: {
+        GEN: number;
+        GEN_EWS: number;
+        OBC: number;
+        ST: number;
+        SC: number;
+        PWD: number;
     };
 
     @IsString()
